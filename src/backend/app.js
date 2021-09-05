@@ -1,0 +1,1 @@
+// Arquivo que conterá a classe App e importações do projeto
