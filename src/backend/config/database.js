@@ -5,8 +5,8 @@ module.exports = {
     password: '',
     database: '',
     define: {
-      timeStamps: true,
-      underscored: true,
-      underscoredAll: true,
+        timeStamps: true,
+        underscored: true,
+        underscoredAll: true,
     }
-  } 
+}
