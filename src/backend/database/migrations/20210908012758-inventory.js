@@ -14,14 +14,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
       catalog_id: {
         type: Sequelize.INTEGER,
         references: { model: 'catalog', key: 'id'},
@@ -35,6 +27,14 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
       }
     }); 
   },

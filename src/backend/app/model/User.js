@@ -17,6 +17,7 @@ class User extends Model {
       district: Sequelize.STRING,
       number_house: Sequelize.STRING,
       street: Sequelize.STRING,
+      is_admin: Sequelize.BOOLEAN,
       complement: Sequelize.STRING
     }, 
     {  
