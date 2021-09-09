@@ -21,3 +21,5 @@ class Store extends Model {
     return this;
 }
 }
+
+export default Store
