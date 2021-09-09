@@ -22,4 +22,4 @@ class Store extends Model {
 }
 }
 
-export default Store
+export default Store;
