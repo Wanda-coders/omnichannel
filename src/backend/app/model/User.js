@@ -12,7 +12,7 @@ class User extends Model {
       password: Sequelize.VIRTUAL,
       contact: Sequelize.STRING,
       postal_code: Sequelize.STRING,
-      state: Sequelize.ENUM,
+      state: Sequelize.ENUM(27),
       city: Sequelize.STRING,
       district: Sequelize.STRING,
       number_house: Sequelize.STRING,
@@ -22,9 +22,9 @@ class User extends Model {
     {  
       sequelize, 
     });
-    this.addHook('beforeSave', async user => {
-      if(user.password){
-        user.password_hash = await bcrypt.hash(user.password, 10)
+    this.addHook('beforeSave', async users => {
+      if(users.password){
+        users.password_hash = await bcrypt.hash(users.password, 10)
       }
     })
     return this;
