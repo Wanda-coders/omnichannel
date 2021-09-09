@@ -6,7 +6,7 @@ class Purchase extends Model{
             status_purchase: Sequelize.ENUM,
             quantity_purchase: Sequelize.INTEGER,
             data_purchase: Sequelize.DATE,
-            delivery_store: Sequelize.BOOLEAN, 
+            delivery_status: Sequelize.BOOLEAN, 
             final_price: Sequelize.DECIMAL,
         },
         {
