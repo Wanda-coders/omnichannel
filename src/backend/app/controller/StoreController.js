@@ -33,7 +33,7 @@ class StoreController{
     })
     if(!isStoreId){
       return res.status(400).json({
-        message: "Loja não cadastrada!"
+        message: "Store doesn't exists!"
       })
     }
     return res.status(200).json(isStoreId);

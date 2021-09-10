@@ -7,6 +7,8 @@ import UserController from './app/controller/UserController';
 import authMiddleware from './app/middlewares/auth';
 
 import StoreController from './app/controller/StoreController';
+import CatalogController from './app/controller/CatalogController';
+import InventoryController from './app/controller/InventoryController';
 
 const routes = new Router();
 // users
@@ -24,12 +26,11 @@ routes.post('/store', StoreController.postStore);
 routes.get('/store', StoreController.getAllStores);
 routes.get('/store/:id', StoreController.getStoreById)
 
-// produto
-routes.post('/store', UserController.postClient);
-routes.get('/store', UserController.getAllClients);
-routes.get('/store/:id', UserController.getById);
-routes.delete('/store/:id', UserController.getById);
-routes.put('/store/:id', UserController.getById);
+// catalogo
+routes.post('/catalog', CatalogController.postCatalog);
+routes.get('/catalog', CatalogController.getAllCatalog);
+routes.get('/catalog/:id', CatalogController.getCatalogById);
+
 
 // pedido
 routes.post('/store', UserController.postClient);
@@ -38,9 +39,9 @@ routes.get('/store/:id', UserController.getById);
 routes.delete('/store/:id', UserController.getById);
 
 // estoque
-routes.post('/store', UserController.postClient);
-routes.get('/store', UserController.getAllClients);
-routes.get('/store/:id', UserController.getById);
+routes.post('/inventory', InventoryController.postInventory);
+routes.get('/inventory', InventoryController.getAllInventory);
+routes.get('/inventory/:id', InventoryController.getInventoryById);
 
 // fotos
 routes.post('/store', UserController.postClient);

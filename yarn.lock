@@ -69,9 +69,9 @@
   "version" "4.14.172"
 
 "@types/node@*":
-  "integrity" "sha512-S63Dlv4zIPb8x6MMTgDq5WWRJQe56iBEY0O3SOFA9JrRienkOVDXSXBjjJw6HTNQYSE2JI6GMCR6LVbIMHJVvA=="
-  "resolved" "https://registry.npmjs.org/@types/node/-/node-16.7.10.tgz"
-  "version" "16.7.10"
+  "integrity" "sha512-nmP+VR4oT0pJUPFbKE4SXj3Yb4Q/kz3M9dSAO1GGMebRKWHQxLfDNmU/yh3xxCJha3N60nQ/JwXWwOE/ZSEVag=="
+  "resolved" "https://registry.npmjs.org/@types/node/-/node-16.9.0.tgz"
+  "version" "16.9.0"
 
 "@types/webidl-conversions@*":
   "integrity" "sha512-XAahCdThVuCFDQLT7R7Pk/vqeObFNL3YqRyFZg+AqAP/W1/w3xHaIxuW7WszQqTbIBOPRcItYJIou3i/mppu3Q=="
@@ -1367,9 +1367,9 @@
     "saslprep" "^1.0.0"
 
 "mongoose@^6.0.4":
-  "integrity" "sha512-tkbyaGXj1gtIpsIBfp5fqWPzqL36nHfS0x4ykk0H9vHgSWXPvhzabtrs7c94li6Iqv13hTKXXQ4Q09o+mxIONw=="
-  "resolved" "https://registry.npmjs.org/mongoose/-/mongoose-6.0.4.tgz"
-  "version" "6.0.4"
+  "integrity" "sha512-1MoG52oosjEK8z45DHQVbakP6DJG1sbQI/ZASBW8sZRV+rCaG/pC3L3wWjrsiped/2+uhvanWM9C89F2n6bQ3w=="
+  "resolved" "https://registry.npmjs.org/mongoose/-/mongoose-6.0.5.tgz"
+  "version" "6.0.5"
   dependencies:
     "bson" "^4.2.2"
     "kareem" "2.3.2"

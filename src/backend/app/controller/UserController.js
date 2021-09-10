@@ -13,7 +13,7 @@ class UserController {
 
     if (userExists) {
       return res.status(401).json({
-        message: "Usuario já existe em nossa base de dados"
+        message: "User already exists!"
       })
     }
     const {
@@ -86,7 +86,7 @@ class UserController {
 
     if(!(await schema.isValid(req.body))){
       return res.status(401).json({ 
-        message: 'Falha na validação'
+        message: 'Validation failed!'
       })
     }
 
