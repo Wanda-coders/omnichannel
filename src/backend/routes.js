@@ -20,10 +20,9 @@ routes.post('/auth', AuthController.store);
 // routes.use(authMiddleware)
 // routes.get('/auth', UserController.index);
 // store
-routes.post('/store', UserController.postClient);
-routes.get('/store', UserController.getAllClients);
-routes.get('/store/:id', UserController.getById);
-
+routes.post('/store', StoreController.postStore);
+routes.get('/store', StoreController.getAllStores);
+routes.get('/store/:id', StoreController.getStoreById)
 
 // produto
 routes.post('/store', UserController.postClient);

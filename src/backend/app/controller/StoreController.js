@@ -18,64 +18,26 @@ class StoreController{
     return res.json({id, name, contact, postal_code, state, city, district, address, number, complement});
   };
 
-  async index(req, res){
-    const person = {
-      name: "Nome da Pessoa",
-      age: 21
-    }
-    return res.status(200).json(person);
+  async getAllStores(req, res){
+   const isStore = await Store.findAll()
+   return res.status(200).json(isStore);
   };
-  async delete(req, res){
-    return res.status(200).json({ message: 'Isso aí psiti!'});
-  };
-  async update(req, res){
-    const schema = Yup.object().shape({
-      name: Yup.string(),
-      email: Yup.string().email(),
-      oldPassword: Yup.string().min(6),
-      password: Yup.string().when('oldPassword',
-        (oldPassword, field) => oldPassword ? field.required().min(6) : field
-      ),
-      confirmPassword: Yup.string().when('password',
-        (password, field) => password ? field.required().min(6).oneOf([Yup.ref('password')]) : field
-      ),
-    })
+  async getStoreById(req, res) {
+    const { id } = req.params;
 
-    if(!(await schema.isValid(req.body))){
-      return res.status(401).json({ 
-        message: 'Falha na validação'
+    const isStoreId = await Store.findOne({
+      where: {
+        id,
+      },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    })
+    if(!isStoreId){
+      return res.status(400).json({
+        message: "Loja não cadastrada!"
       })
     }
-
-    // console.log(req.userEmail)
-
-    const { email, oldPassword } = req.body;
-
-    const user = await User.findByPk(req.userId)
-    console.log('email informado no banco', user.email)
-    console.log('email informado no body', email)
-
-    if(email !== user.email){
-      const userExists = await User.findOne({ where: { email }})
-      // retorno
-      if(userExists){
-        return res.status(400).json({ message: 'Verifique o email informado'})
-      }
-      return res.status(400).json({ message: 'Email não confere'})
-    }
-
-    if(oldPassword && !(await user.checkPassword(oldPassword))){
-      return res.status(400).json({ message: 'Senha não confere'})
-    }
-
-    const { id, name, employee} = await user.update(req.body);
-
-    return res.status(200).json({
-      id, 
-      name, 
-      employee
-    });
-  };
+    return res.status(200).json(isStoreId);
+  }
 }
 
 export default new StoreController();
