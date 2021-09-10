@@ -19,14 +19,14 @@ module.exports = {
       },
       inventory_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'inventory', key: 'id'},
+        references: { model: 'inventories', key: 'id'},
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
       },
       catalog_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'catalog', key: 'id'},
+        references: { model: 'catalogs', key: 'id'},
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
@@ -40,7 +40,7 @@ module.exports = {
       },
       purchase_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'purchase', key: 'id'},
+        references: { model: 'purchases', key: 'id'},
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
