@@ -62,68 +62,71 @@ class UserController {
     return res.status(200).json(isClientId);
   }
 
-  // async updateById(req, res){
+  async updateById(req, res){
 
-  //   const schema = Yup.object().shape({
-  //     name: Yup.string(),
-  //     email: Yup.string().email(),
-  //     oldPassword: Yup.string().min(6),
-  //     contact: Yup.string().required(),
-  //     postal_code: Yup.string().required(),
-  //     // state: Yup.array().min(27),
-  //     city: Yup.string().required(),
-  //     district: Yup.string().required(),
-  //     number_house: Yup.string().required(),
-  //     street: Yup.string().required(),
-  //     complement: Yup.string().required(), 
-  //     password: Yup.string().when('oldPassword',
-  //       (oldPassword, field) => oldPassword ? field.required().min(6) : field
-  //     ),
-  //     confirmPassword: Yup.string().when('password',
-  //       (password, field) => password ? field.required().min(6).oneOf([Yup.ref('password')]) : field
-  //     ),
-  //   })
+    const schema = Yup.object().shape({
+      name: Yup.string(),
+      email: Yup.string().email(),
+      oldPassword: Yup.string().min(6),
+      contact: Yup.string(),
+      postal_code: Yup.string(),
+      state: Yup.string(),
+      city: Yup.string(),
+      district: Yup.string(),
+      number_house: Yup.string(),
+      street: Yup.string(),
+      complement: Yup.string(), 
+      // password: Yup.string().when('oldPassword',
+      //   (oldPassword, field) => oldPassword ? field.required().min(6) : field
+      // ),
+      // confirmPassword: Yup.string().when('password',
+      //   (password, field) => password ? field.required().min(6).oneOf([Yup.ref('password')]) : field
+      // ),
+    })
 
-  //   // if(!(await schema.isValid(req.body))){
-  //   //   return res.status(401).json({ 
-  //   //     message: 'Falha na validação'
-  //   //   })
-  //   // }
+    if(!(await schema.isValid(req.body))){
+      return res.status(401).json({ 
+        message: 'Falha na validação'
+      })
+    }
 
-  //   // console.log(req.userEmail)
+    // console.log(req.userEmail)
 
-  //   const { email, oldPassword, contact, district, number_house, street, complement, postal_code } = req.body;
+    const { email, oldPassword } = req.body;
 
-  //   const user = await User.findByPk(req.userId)
-  //   console.log('email informado no banco', user.email)
-  //   console.log('email informado no body', email)
+    const {id} = req.query
+    console.log(id)
 
-  //   if(email !== user.email){
-  //     const userExists = await User.findOne({ where: { email }})
-  //     // retorno
-  //     if(userExists){
-  //       return res.status(400).json({ message: 'Verifique o email informado'})
-  //     }
-  //     return res.status(400).json({ message: 'Email não confere'})
-  //   }
+    const user = await User.findByPk(id)
+    console.log(email)
+    console.log(user)
 
-  //   if(oldPassword && !(await user.checkPassword(oldPassword))){
-  //     return res.status(400).json({ message: 'Senha não confere'})
-  //   }
+    if(email !== user.email){
+      const userExists = await User.findOne({ where: { email }})
+      // retorno
+      if(userExists){
+        return res.status(400).json({ message: 'Verifique o email informado'})
+      }
+      return res.status(400).json({ message: 'Email não confere'})
+    }
 
-  //   const { id, name} = await user.update(req.body);
+    if(oldPassword && !(await user.checkPassword(oldPassword))){
+      return res.status(400).json({ message: 'Senha não confere'})
+    }
 
-  //   return res.status(200).json({
-  //     id, 
-  //     name, 
-  //     contact, 
-  //     district, 
-  //     number_house,
-  //     street, 
-  //     complement, 
-  //     postal_code 
-  //   });
-  // };
+    const { name, contact, district, number_house, street, complement, postal_code} = await user.update(req.body);
+
+    return res.status(200).json({
+      id, 
+      name, 
+      contact, 
+      district, 
+      number_house,
+      street, 
+      complement, 
+      postal_code 
+    });
+  };
 
 
 }
