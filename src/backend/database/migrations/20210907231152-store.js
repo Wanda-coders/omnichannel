@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      CEP: {
+      postal_code: {
         type: Sequelize.STRING,
         allowNull: false,
       },
