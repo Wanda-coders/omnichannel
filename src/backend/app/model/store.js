@@ -6,8 +6,8 @@ class Store extends Model {
     super.init({
       name: Sequelize.STRING,
       contact: Sequelize.STRING,
-      CEP: Sequelize.STRING,
-      state: Sequelize.ENUM,
+      postal_code: Sequelize.STRING,
+      state: Sequelize.ENUM(27),
       city: Sequelize.STRING,
       district: Sequelize.STRING,
       address: Sequelize.STRING,
