@@ -48,7 +48,6 @@ class InventoryController {
     const isInventoryId = await Inventory.findOne({
       where: {
         id,
-
       },
     })
     if (!isInventoryId) {
