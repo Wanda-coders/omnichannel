@@ -15,58 +15,31 @@ class OrderController {
     return res.status(200).json(orderUser);
   }
 
-  async postPurchase(req, res) {
-    
-    const { quantity_purchase, delivery_status, date_purchase, status_purchase } = req.body
+  async postOrder(req, res) {
 
-    if (quantity_purchase > 1) {
-      return res.status(401).json({
-        message: "O limite no carrinho é um pedido"
-      })
-    }
-
-    if (status_purchase === "RECUSADO") {
-      return res.status(401).json({
-        message: "Pedido não autorizado"
-      })
-    }
     const date = new Date()
-    if(date_purchase < date){
+    if(req.body.date_purchase < date){
       return res.status(401).json({
         message: "data não pode ser inferior a data atual"
       })
     }
-    const productExists = await Order.findOne({
-      where: {
-        product_id: req.body.product_id,   
-        user_id: req.body.user_id
-      }
+
+    // TO-DO: regra de negócio de ter apenas um produto de cada categoria
+    // TO-DO: calcular o preço final do pedido
+
+    const { date_purchase, user_id, store_id, ...data} = req.body
+
+    const orderCreated = await Order.create({
+      date_purchase: date_purchase,
+      user_id: user_id,
+      store_id: store_id,
+      status_purchase: "Recebido",
+      delivery_status: false,
+      final_price: 0
     })
 
-    if(productExists){
-      return res.status(400).json({
-        messsage: "Não pode ser o mesmo produto"
-      })
-    }
-    const {
-      id,
-      store_id,
-      final_price,
-      user_id,
-      product_id
-    } = await Order.create(req.body)
 
-    return res.json({
-      id,
-      store_id,
-      status_purchase,
-      quantity_purchase,
-      date_purchase,
-      delivery_status,
-      final_price,
-      user_id,
-      product_id
-    });
+    return res.json(orderCreated);
   };
 
   async getOrderById(req, res) {

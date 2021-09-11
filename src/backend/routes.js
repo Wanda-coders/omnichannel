@@ -52,7 +52,7 @@ routes.get('/store/:id', UserController.getById);
 routes.post('/product', ProductController.postProduct);
 
 // pedido
-routes.post('/purchase', OrderController.postPurchase);
+routes.post('/order', OrderController.postOrder);
 routes.get('/order', OrderController.getOrderById);
 
 export default routes;
