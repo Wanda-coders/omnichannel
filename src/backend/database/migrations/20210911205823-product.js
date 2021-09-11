@@ -17,9 +17,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      inventory_id: {
+      order_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'inventories', key: 'id' },
+        references: { model: 'orders', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
@@ -27,13 +27,6 @@ module.exports = {
       catalog_id: {
         type: Sequelize.INTEGER,
         references: { model: 'catalogs', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
-      },
-      store_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'stores', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
