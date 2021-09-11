@@ -25,7 +25,9 @@ class OrderController {
     }
 
     // TO-DO: regra de negócio de ter apenas um produto de cada categoria
-    // TO-DO: calcular o preço final do pedido
+
+    const sumPrices = (accumulator, currentValue) => accumulator + currentValue.price;
+    const final_price = req.body.product_list.reduce(sumPrices, 0);
 
     const { date_purchase, user_id, store_id, ...data} = req.body
 
@@ -35,7 +37,7 @@ class OrderController {
       store_id: store_id,
       status_purchase: "Recebido",
       delivery_status: false,
-      final_price: 0
+      final_price: final_price
     })
 
 
