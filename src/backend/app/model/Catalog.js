@@ -5,7 +5,8 @@ class Catalog extends Model {
     super.init({
       name: Sequelize.STRING,
       description: Sequelize.STRING,
-      unit_value: Sequelize.DECIMAL, 
+      unit_value: Sequelize.DECIMAL,
+      category: Sequelize.STRING,
     }, 
     {  
       sequelize, 

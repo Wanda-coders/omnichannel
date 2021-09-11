@@ -21,6 +21,7 @@ class CatalogController {
       name,
       description,
       unit_value,
+      category,
     } = await Catalog.create(req.body)
 
     return res.json({
@@ -28,6 +29,7 @@ class CatalogController {
       name,
       description,
       unit_value,
+      category,
     });
 
   };
