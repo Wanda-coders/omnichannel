@@ -2,31 +2,36 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('products', {
+    await queryInterface.createTable('orders', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      price: {
+      status_purchase: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      quantity_purchase: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      date_purchase: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      delivery_status: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      final_price: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
-      quantity: {
+      user_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      inventory_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'inventories', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
-      },
-      catalog_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'catalogs', key: 'id' },
+        references: { model: 'users', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
@@ -34,6 +39,13 @@ module.exports = {
       store_id: {
         type: Sequelize.INTEGER,
         references: { model: 'stores', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: true,
+      },
+      product_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'products', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
@@ -46,10 +58,12 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+
     });
   },
 
   down: async (queryInterface, _Sequelize) => {
-    await queryInterface.dropTable('products');
+
+    await queryInterface.dropTable('orders');
   }
 };
