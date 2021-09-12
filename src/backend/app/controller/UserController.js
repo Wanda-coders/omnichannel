@@ -29,6 +29,7 @@ class UserController {
     });
 
   };
+
   async getAllClients(req, res) {
 
     const isClient = await User.findAll({
@@ -40,7 +41,7 @@ class UserController {
       'password_hash', 'createdAt', 'updatedAt'] },
     })
     return res.status(200).json(isClient);
-  }
+  };
 
   async getById(req, res) {
     const { id } = req.params;
@@ -56,11 +57,11 @@ class UserController {
     })
     if(!isClientId){
       return res.status(400).json({
-        message: "User already exists!"
+        message: "No User found with this id!"
       })
     }
     return res.status(200).json(isClientId);
-  }
+  };
 
   async updateById(req, res){
 
@@ -127,7 +128,6 @@ class UserController {
       postal_code 
     });
   };
-
 
 }
 

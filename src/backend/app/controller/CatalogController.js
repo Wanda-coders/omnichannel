@@ -33,12 +33,12 @@ class CatalogController {
     });
 
   };
+
   async getAllCatalog(req, res) {
 
     const isCatalog = await Catalog.findAll()
     return res.status(200).json(isCatalog);
-  }
-
+  };
 
   async getCatalogById_standalone(id) {
     const isCatalogId = await Catalog.findOne({
@@ -47,7 +47,7 @@ class CatalogController {
       },
     })
     return isCatalogId
-  }
+  };
 
   async getCatalogById(req, res) {
     const { id } = req.params;
@@ -59,11 +59,11 @@ class CatalogController {
     })
     if(!isCatalogId){
       return res.status(400).json({
-        message: "Catalog already exists!"
+        message: "No Product found with this id!"
       })
     }
     return res.status(200).json(isCatalogId);
-  }
+  };
 
 }
 

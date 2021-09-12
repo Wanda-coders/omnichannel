@@ -5,8 +5,8 @@ class StoreController{
   async postStore(req, res) {
 
     const storeExists = await Store.findOne({
-       where: { 
-         name: req.body.name 
+      where: { 
+        name: req.body.name 
         }
       });
 
@@ -19,9 +19,11 @@ class StoreController{
   };
 
   async getAllStores(req, res){
-   const isStore = await Store.findAll()
-   return res.status(200).json(isStore);
+    console.log(process.env.MYVAR)
+    const isStore = await Store.findAll()
+    return res.status(200).json(isStore);
   };
+
   async getStoreById(req, res) {
     const { id } = req.params;
 
@@ -33,11 +35,11 @@ class StoreController{
     })
     if(!isStoreId){
       return res.status(400).json({
-        message: "Store doesn't exists!"
+        message: "Store doesn't exist!"
       })
     }
     return res.status(200).json(isStoreId);
-  }
+  };
 }
 
 export default new StoreController();

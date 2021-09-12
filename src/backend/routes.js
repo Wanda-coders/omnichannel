@@ -16,16 +16,18 @@ import ProductController from './app/controller/ProductController';
 
 const routes = new Router();
 const upload = multer(multerConfig)
+
 // users
 routes.post('/user', UserController.postClient);
 routes.get('/user', UserController.getAllClients);
 routes.get('/user/:id', UserController.getById);
 routes.put('/user', UserController.updateById);
 
+// auth
 routes.post('/auth', AuthController.store);
-
 // routes.use(authMiddleware)
 // routes.get('/auth', UserController.index);
+
 // store
 routes.post('/store', StoreController.postStore);
 routes.get('/store', StoreController.getAllStores);
