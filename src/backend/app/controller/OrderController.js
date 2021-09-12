@@ -30,6 +30,14 @@ class OrderController {
       })
     }
 
+    const arrQuantity = req.body.product_list.map(element => element.quantity);
+    const maxQuantity = Math.max(...arrQuantity);
+    if(maxQuantity > 1){
+      return res.status(401).json({
+        message: "Ops, você só pode comprar uma unidade de cada produto!"
+      })
+    }
+
     function getCategories(product_list) {
       const promises = product_list.map(
         async function (element) {
