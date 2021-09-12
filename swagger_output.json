@@ -1,0 +1,636 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "omnichannel",
+    "description": "Documentação do backend referente ao omnichannel do Luiza < Code >"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "User",
+      "description": "Rotas referente ao usuário"
+    },
+    {
+      "name": "Store",
+      "description": "Rotas referente às lojas"
+    },
+    {
+      "name": "Catalog",
+      "description": "Rotas referente ao catálogo de produtos disponíveis"
+    },
+    {
+      "name": "Photos",
+      "description": "Rotas referente às fotos do catálogo de produtos disponíveis"
+    },
+    {
+      "name": "Authentication",
+      "description": "Autenticação de usuário"
+    },
+    {
+      "name": "Inventory",
+      "description": "Rotas referente o estoque"
+    },
+    {
+      "name": "Product",
+      "description": "Rotas referente os produtos"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Cria um novo usuário",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Informações do usuário",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Natália Alpino"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "nathy.alpino1@gmail.com"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "000.000.000-000"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "pass"
+                },
+                "birth_date": {
+                  "type": "string",
+                  "example": "2021-09-11"
+                },
+                "postal_code": {
+                  "type": "string",
+                  "example": "14403-075"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "SP"
+                },
+                "contact": {
+                  "type": "string",
+                  "example": ""
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Franca"
+                },
+                "district": {
+                  "type": "string",
+                  "example": "Street"
+                },
+                "number_house": {
+                  "type": "number",
+                  "example": 2390
+                },
+                "street": {
+                  "type": "string",
+                  "example": "José Marcelo Leite"
+                },
+                "complement": {
+                  "type": "string",
+                  "example": ""
+                },
+                "is_admin": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Lista os usuários",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "description": "Atualiza um usuário",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "User data.",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Natália Alpino"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "nathy.alpino1@gmail.com"
+                },
+                "oldPassword": {
+                  "type": "string",
+                  "example": "pass"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "000.000.000-000"
+                },
+                "contact": {
+                  "type": "string",
+                  "example": ""
+                },
+                "postal_code": {
+                  "type": "string",
+                  "example": "14403-075"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "SP"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Franca"
+                },
+                "district": {
+                  "type": "string",
+                  "example": "Street"
+                },
+                "number_house": {
+                  "type": "number",
+                  "example": 2390
+                },
+                "street": {
+                  "type": "string",
+                  "example": "José Marcelo Leite"
+                },
+                "complement": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Lista um usuário por Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Autentica o usuário",
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "body",
+            "description": "Informações de autenticação",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "nathy.alpino1@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "pass"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/store": {
+      "post": {
+        "tags": [
+          "Store"
+        ],
+        "description": "Cria uma nova loja",
+        "parameters": [
+          {
+            "name": "Store",
+            "in": "body",
+            "description": "Informações da Loja",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Loja São Joaquim"
+                },
+                "contact": {
+                  "type": "string",
+                  "example": "(11)1111-1111"
+                },
+                "postal_code": {
+                  "type": "string",
+                  "example": "14402-000"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "SP"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Franca"
+                },
+                "district": {
+                  "type": "string",
+                  "example": "São Joaquim"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "Rua São Jose"
+                },
+                "number": {
+                  "type": "string",
+                  "example": "1010"
+                },
+                "complement": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "description": "Lista as lojas físicas",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/store/{id}": {
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "description": "Lista uma loja pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/catalog": {
+      "post": {
+        "tags": [
+          "Catalog"
+        ],
+        "description": "Cria um novo produto no catálogo",
+        "parameters": [
+          {
+            "name": "catalog",
+            "in": "body",
+            "description": "Dados do catálogo",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Funko"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Mulher-Maravilha"
+                },
+                "unit_value": {
+                  "type": "string",
+                  "example": "75.00"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Colecionáveis"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "description": "Lista os produtos disponíveis",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/catalog/{id}": {
+      "get": {
+        "tags": [
+          "Catalog"
+        ],
+        "description": "Lista um produto pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/inventory": {
+      "post": {
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Adciona um produto no estoque",
+        "parameters": [
+          {
+            "name": "inventory",
+            "in": "body",
+            "description": "Dados do inventário/estoque",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "quantity": {
+                  "type": "number",
+                  "example": 10
+                },
+                "catalog_id": {
+                  "type": "number",
+                  "example": 2
+                },
+                "store_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Lista os produtos do estoque",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/inventory/{id}": {
+      "get": {
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Lista um produto do estoque pelo ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/photos": {
+      "post": {
+        "tags": [
+          "Photos"
+        ],
+        "description": "Salva uma novo foto",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "photo",
+            "in": "formData",
+            "type": "file",
+            "required": "true",
+            "description": "Insira a foto..."
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/product": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Lista todos os produtos",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Cria um novo produto",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "body",
+            "description": "Informações do producto",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "catalog_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "store_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "price": {
+                  "type": "number",
+                  "example": 10
+                },
+                "inventory_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 5
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {}
+}
