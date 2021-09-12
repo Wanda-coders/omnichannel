@@ -88,23 +88,6 @@ class OrderController {
     return res.json(orderCreated);
   };
 
-  async updateOrderStatus(req, res) {
-    const { id, status_purchase, delivery_status } = req.body;
-    const getOrder = await Order.findOne({
-      where: { id }
-    })
-
-    if(!getOrder) {
-      return res.status(400).json({ message: 'Order not found' });
-    }
-
-    const updateOrder = await Order.update({
-      where: { id, status_purchase: 'APROVADO' },
-    });
-
-    return res.status(200).json(updateOrder);
-  };
-
   async getOrderById(req, res) {
   
     const {user_id} = req.body
