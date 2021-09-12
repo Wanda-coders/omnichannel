@@ -259,89 +259,34 @@
     "/store": {
       "post": {
         "tags": [
-          "User"
+          "Store"
         ],
-        "description": "Cria um novo usuário",
+        "description": "Cria uma nova loja",
         "parameters": [
           {
-            "name": "user",
+            "name": "obj",
             "in": "body",
-            "description": "Informações do usuário",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
-                  "type": "string",
-                  "example": "Natália Alpino"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "nathy.alpino1@gmail.com"
-                },
-                "cpf": {
-                  "type": "string",
-                  "example": "000.000.000-000"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "pass"
-                },
-                "birth_date": {
-                  "type": "string",
-                  "example": "2021-09-11"
-                },
-                "postal_code": {
-                  "type": "string",
-                  "example": "14403-075"
-                },
-                "state": {
-                  "type": "string",
-                  "example": "SP"
-                },
-                "contact": {
-                  "type": "string",
-                  "example": ""
-                },
-                "city": {
-                  "type": "string",
-                  "example": "Franca"
-                },
-                "district": {
-                  "type": "string",
-                  "example": "Street"
-                },
-                "number_house": {
-                  "type": "number",
-                  "example": 2390
-                },
-                "street": {
-                  "type": "string",
-                  "example": "José Marcelo Leite"
-                },
-                "complement": {
-                  "type": "string",
-                  "example": ""
-                },
-                "is_admin": {
-                  "type": "boolean",
-                  "example": false
+                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
-          "409": {
-            "description": "Conflict"
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
       "get": {
         "tags": [
-          "User"
+          "Store"
         ],
-        "description": "Lista os usuários",
+        "description": "Cria uma nova loja",
         "parameters": [],
         "responses": {
           "200": {
@@ -353,9 +298,9 @@
     "/store/{id}": {
       "get": {
         "tags": [
-          "User"
+          "Store"
         ],
-        "description": "Lista um usuário por Id",
+        "description": "Cria uma nova loja",
         "parameters": [
           {
             "name": "id",
@@ -368,52 +313,8 @@
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "User"
-        ],
-        "description": "Lista um usuário por Id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "User"
-        ],
-        "description": "Lista um usuário por Id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -523,6 +424,118 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/photos": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/product": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "quantity": {
+                  "example": "any"
+                },
+                "catalog_id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/order": {
+      "post": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "date_purchase": {
+                  "example": "any"
+                },
+                "product_list": {
+                  "example": "any"
+                },
+                "user_id": {
+                  "example": "any"
+                },
+                "store_id": {
+                  "example": "any"
+                },
+                "...data": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id\r": {
+                  "example": "any"
+                },
+                "user_id": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {

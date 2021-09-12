@@ -21,6 +21,7 @@ class CatalogController {
       name,
       description,
       unit_value,
+      category,
     } = await Catalog.create(req.body)
 
     return res.json({
@@ -28,6 +29,7 @@ class CatalogController {
       name,
       description,
       unit_value,
+      category,
     });
 
   };
@@ -37,13 +39,22 @@ class CatalogController {
     return res.status(200).json(isCatalog);
   }
 
+
+  async getCatalogById_standalone(id) {
+    const isCatalogId = await Catalog.findOne({
+      where: {
+        id,
+      },
+    })
+    return isCatalogId
+  }
+
   async getCatalogById(req, res) {
     const { id } = req.params;
 
     const isCatalogId = await Catalog.findOne({
       where: {
         id,
-        
       },
     })
     if(!isCatalogId){

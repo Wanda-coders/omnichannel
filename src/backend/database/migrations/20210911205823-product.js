@@ -2,43 +2,31 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('purchases', {
+    await queryInterface.createTable('products', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      status_purchase: {
-        type: Sequelize.ENUM('APROVADO', 'PENDENTE', 'RECUSADO'),
-        allowNull: false,
-      },
-      quantity_purchase: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      date_purchase: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      delivery_status: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },
-      final_price: {
+      price: {
         type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
-      user_id: {
+      quantity: {
         type: Sequelize.INTEGER,
-        references: { model: 'users', key: 'id' },
+        allowNull: false,
+      },
+      order_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'orders', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
       },
-      store_id: {
+      catalog_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'stores', key: 'id' },
+        references: { model: 'catalogs', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,
@@ -51,11 +39,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('purchases');
+  down: async (queryInterface, _Sequelize) => {
+    await queryInterface.dropTable('products');
   }
 };

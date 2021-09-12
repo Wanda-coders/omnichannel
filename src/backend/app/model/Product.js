@@ -10,11 +10,8 @@ class Product extends Model {
     return this;
   }
   static associate(models) {
-    this.belongsTo(models.Inventory, { foreignKey: 'inventory_id', as: 'inventory'});
-    this.belongsTo(models.Catalog, { foreignKey: 'catalog_id', as: 'catalog'});
-    this.belongsTo(models.Store, { foreignKey: 'store_id', as: 'stores'});
-    this.belongsTo(models.Purchase, { foreignKey: 'purchase_id', as: 'purchase'});
-    this.belongsTo(models.Photo, { foreignKey: 'photo_id', as: 'photos'});
+    this.belongsTo(models.Catalog, { foreignKey: 'catalog_id', as: 'catalogs'});
+    this.belongsTo(models.Order, { foreignKey: 'order_id', as: 'orders'});
   }
 }
 
