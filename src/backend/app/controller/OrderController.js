@@ -7,19 +7,7 @@ function hasDuplicates(array) {
   return (new Set(array)).size !== array.length;
 }
 
-
 class OrderController {
-
-  async getOrders(orderUser) {
-    const promises = orderUser.map(
-      async function (element) {
-        const result2 = await this.getOrderById({"params": element}).then(function(res) {
-          return res
-        });
-        return result2
-    });
-    return Promise.all(promises);
-  }
   
   async postOrder(req, res) {
 
@@ -97,7 +85,6 @@ class OrderController {
         id: order_id
       },
     })
-    console.log(isOrder)
     if (!isOrder) {
       return res.status(404).json({
         message: "Order not found!"
@@ -137,19 +124,19 @@ class OrderController {
         user_id: userId
       }
     })
-    console.log(orderUser)
-    console.log(this)
 
-    // let order_list = [];
-    // for (var i = 0; i < orderUser.length; i++){
-    //     console.log(this)
-    //     console.log(OrderController)
-    //     this_order = await OrderController.getOrderById({"params": {"id": orderUser[i].id}}).then(function(res) {
-    //     return res
-    //   });
-    //   order_list.push(this_order)
-    // }
-    const order_list = await this.getOrders(orderUser);
+    var thisClass = this;
+    function getOrders(orderUser) {
+      const promises = orderUser.map(
+        async function (element) {
+          const result2 = await thisClass.getOrderById({"params": element}).then(function(res) {
+            return res
+          });
+          return result2
+      });
+      return Promise.all(promises);
+    }
+    const order_list = await getOrders(orderUser);
 
     if (res === undefined) {
       return order_list

@@ -47,6 +47,6 @@ routes.post('/photos', upload.single('photo'), PhotosController.store);
 // pedido
 routes.post('/order', OrderController.postOrder);
 routes.get('/order/:id', OrderController.getOrderById);
-routes.get('/orderByClient/:id', OrderController.getAllByIdCliente);
+routes.get('/orderByClient/:id', OrderController.getAllByIdCliente.bind(OrderController));
 
 export default routes;
