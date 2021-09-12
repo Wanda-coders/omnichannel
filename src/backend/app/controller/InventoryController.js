@@ -8,7 +8,7 @@ class InventoryController {
     const inventoryExists = await Inventory.findOne({
       where: {
         catalog_id: req.body.catalog_id,
-        // quantity: {$gt: 0} 
+        store_id: req.body.store_id
       }
     })
     const { quantity } = req.body
@@ -36,28 +36,49 @@ class InventoryController {
     });
 
   };
-  async getAllInventory(req, res) {
 
-    const isInventory = await Inventory.findAll()
-    return res.status(200).json(isInventory);
-  }
+  async getInventory(req, res) {
+    const { catalog_id, store_id } = req.query;
+    console.log(catalog_id)
+    console.log(store_id)
 
-  async getInventoryById(req, res) {
-    const { id } = req.params;
-
-    const isInventoryId = await Inventory.findOne({
-      where: {
-        id,
-      },
-    })
-    if (!isInventoryId) {
-      return res.status(400).json({
-        message: "Inventory already exists!"
+    let inventoryResults;
+    if ((catalog_id !== undefined) & (store_id !== undefined)) {
+      console.log("Filter by catalog and store")
+      inventoryResults = await Inventory.findAll({
+        where: {
+          catalog_id: catalog_id,
+          store_id: store_id
+        },
       })
     }
-    return res.status(200).json(isInventoryId);
-  }
-
+    else if (catalog_id !== undefined) {
+      console.log("Filter by catalog only")
+      inventoryResults = await Inventory.findAll({
+        where: {
+          catalog_id: catalog_id,
+        },
+      })
+    }
+    else if (store_id !== undefined) {
+      console.log("Filter by store only")
+      inventoryResults = await Inventory.findAll({
+        where: {
+          store_id: store_id,
+        },
+      })
+    }
+    else {
+      console.log("No filter")
+      inventoryResults = await Inventory.findAll()
+    }
+    if (!inventoryResults) {
+      return res.status(404).json({
+        message: "Inventory not found!"
+      })
+    }
+    return res.status(200).json(inventoryResults);
+  };
 }
 
 export default new InventoryController();

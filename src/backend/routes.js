@@ -41,8 +41,7 @@ routes.get('/catalog/:id', CatalogController.getCatalogById);
 
 // estoque
 routes.post('/inventory', InventoryController.postInventory);
-routes.get('/inventory', InventoryController.getAllInventory);
-routes.get('/inventory/:id', InventoryController.getInventoryById);
+routes.get('/inventory', InventoryController.getInventory);
 
 // fotos
 routes.post('/photos', upload.single('photo'), PhotosController.store);
