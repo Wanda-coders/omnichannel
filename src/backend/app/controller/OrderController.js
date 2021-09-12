@@ -1,5 +1,10 @@
 
 import Order from "../model/Order";
+import CatalogController from "./CatalogController";
+
+function hasDuplicates(array) {
+  return (new Set(array)).size !== array.length;
+}
 
 class OrderController {
 
@@ -24,8 +29,31 @@ class OrderController {
       })
     }
 
-    // TO-DO: regra de negócio de ter apenas um produto de cada categoria
+    function getCategories(product_list) {
+      const promises = product_list.map(
+        async function (element) {
+          const result2 = await CatalogController.getCatalogById_standalone(element.id).then(function(res) {
+            return res.category
+          });
+          return result2
+      });
+      return Promise.all(promises);
+    }
+    const categories = await getCategories(req.body.product_list);
 
+    const hasDuplicatedProducts = hasDuplicates(req.body.product_list.map(element => element.id));
+    if(hasDuplicatedProducts){
+      return res.status(401).json({
+        message: "Ops, não pode ter produtos duplicados no carrinho!"
+      })
+    }
+
+    const hasDuplicatedCategories = hasDuplicates(categories);
+    if(hasDuplicatedCategories){
+      return res.status(401).json({
+        message: "Ops, você só pode comprar um produto para cada categoria!"
+      })
+    }
     const sumPrices = (accumulator, currentValue) => accumulator + currentValue.price;
     const final_price = req.body.product_list.reduce(sumPrices, 0);
 
@@ -39,7 +67,6 @@ class OrderController {
       delivery_status: false,
       final_price: final_price
     })
-
 
     return res.json(orderCreated);
   };
