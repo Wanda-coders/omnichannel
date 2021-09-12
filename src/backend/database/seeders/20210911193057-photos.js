@@ -49,7 +49,40 @@ module.exports = {
       catalog_id: 6,
       created_at: new Date(),
       updated_at: new Date(),
-    }], {});
+    },
+    {
+      id: 7,
+      image_name: 'Sylvie',
+      path: 'F2.png',
+      catalog_id: 7,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 8,
+      image_name: 'Gamora',
+      path: 'F3.png',
+      catalog_id: 8,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 9,
+      image_name: 'Homem Aranha',
+      path: 'F9.png',
+      catalog_id: 9,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 10,
+      image_name: 'Hulk',
+      path: 'F10.png',
+      catalog_id: 10,
+      created_at: new Date(),
+      updated_at: new Date(),
+    }
+  ], {});
   },
 
   down: async (queryInterface, _Sequelize) => {
