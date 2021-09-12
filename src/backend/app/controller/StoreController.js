@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import Store from '../model/Store'
+import Store from '../model/Store';
 
 class StoreController{
   async postStore(req, res) {

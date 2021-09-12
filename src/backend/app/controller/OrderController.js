@@ -17,7 +17,7 @@ class OrderController {
 
   async postPurchase(req, res) {
     
-    const { quantity_purchase, delivery_status, date_purchase, status_purchase } = req.body
+    const { product_id, quantity_purchase, delivery_status, date_purchase, status_purchase } = req.body
 
     if (quantity_purchase > 1) {
       return res.status(401).json({
@@ -45,7 +45,7 @@ class OrderController {
 
     if(productExists){
       return res.status(400).json({
-        messsage: "Não pode ser o mesmo produto"
+        message: "Não pode ser o mesmo produto"
       })
     }
     const {
@@ -67,6 +67,23 @@ class OrderController {
       user_id,
       product_id
     });
+  };
+
+  async updateOrderStatus(req, res) {
+    const { id, status_purchase, delivery_status } = req.body;
+    const getOrder = await Order.findOne({
+      where: { id }
+    })
+
+    if(!getOrder) {
+      return res.status(400).json({ message: 'Order not found' });
+    }
+
+    const updateOrder = await Order.update({
+      where: { id, status_purchase: 'APROVADO' },
+    });
+
+    return res.status(200).json(updateOrder);
   };
 
   async getOrderById(req, res) {
