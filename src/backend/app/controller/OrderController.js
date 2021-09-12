@@ -1,5 +1,11 @@
 
 import Order from "../model/Order";
+import Product from "../model/Product";
+import CatalogController from "./CatalogController";
+
+function hasDuplicates(array) {
+  return (new Set(array)).size !== array.length;
+}
 
 class OrderController {
 
@@ -15,58 +21,71 @@ class OrderController {
     return res.status(200).json(orderUser);
   }
 
-  async postPurchase(req, res) {
-    
-    const { quantity_purchase, delivery_status, date_purchase, status_purchase } = req.body
+  async postOrder(req, res) {
 
-    if (quantity_purchase > 1) {
-      return res.status(401).json({
-        message: "O limite no carrinho é um pedido"
-      })
-    }
-
-    if (status_purchase === "RECUSADO") {
-      return res.status(401).json({
-        message: "Pedido não autorizado"
-      })
-    }
     const date = new Date()
-    if(date_purchase < date){
+    if(req.body.date_purchase < date){
       return res.status(401).json({
         message: "data não pode ser inferior a data atual"
       })
     }
-    const productExists = await Order.findOne({
-      where: {
-        product_id: req.body.product_id,   
-        user_id: req.body.user_id
-      }
-    })
 
-    if(productExists){
-      return res.status(400).json({
-        messsage: "Não pode ser o mesmo produto"
+    const arrQuantity = req.body.product_list.map(element => element.quantity);
+    const maxQuantity = Math.max(...arrQuantity);
+    if(maxQuantity > 1){
+      return res.status(401).json({
+        message: "Ops, você só pode comprar uma unidade de cada produto!"
       })
     }
-    const {
-      id,
-      store_id,
-      final_price,
-      user_id,
-      product_id
-    } = await Order.create(req.body)
 
-    return res.json({
-      id,
-      store_id,
-      status_purchase,
-      quantity_purchase,
-      date_purchase,
-      delivery_status,
-      final_price,
-      user_id,
-      product_id
-    });
+    function getCategories(product_list) {
+      const promises = product_list.map(
+        async function (element) {
+          const result2 = await CatalogController.getCatalogById_standalone(element.id).then(function(res) {
+            return res.category
+          });
+          return result2
+      });
+      return Promise.all(promises);
+    }
+    const categories = await getCategories(req.body.product_list);
+
+    const hasDuplicatedProducts = hasDuplicates(req.body.product_list.map(element => element.id));
+    if(hasDuplicatedProducts){
+      return res.status(401).json({
+        message: "Ops, não pode ter produtos duplicados no carrinho!"
+      })
+    }
+
+    const hasDuplicatedCategories = hasDuplicates(categories);
+    if(hasDuplicatedCategories){
+      return res.status(401).json({
+        message: "Ops, você só pode comprar um produto para cada categoria!"
+      })
+    }
+    const sumPrices = (accumulator, currentValue) => accumulator + currentValue.price;
+    const final_price = req.body.product_list.reduce(sumPrices, 0);
+
+    const { date_purchase, user_id, store_id, ...data} = req.body
+
+    const orderCreated = await Order.create({
+      date_purchase: date_purchase,
+      user_id: user_id,
+      store_id: store_id,
+      status_purchase: "Recebido",
+      delivery_status: false,
+      final_price: final_price
+    })
+
+    for (var i = 0; i < req.body.product_list.length; i++){
+      const productCreated = await Product.create({
+        "order_id": orderCreated.id,
+        "catalog_id": req.body.product_list[i].id,
+        "price": req.body.product_list[i].price,
+        "quantity": req.body.product_list[i].quantity,
+      })
+    }
+    return res.json(orderCreated);
   };
 
   async getOrderById(req, res) {

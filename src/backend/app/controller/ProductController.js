@@ -34,7 +34,7 @@ class ProductController {
   async getAllProduct(req, res) {
 
     const isProduct = await Product.findAll()
-    return res.status(200).json(isInventory);
+    return res.status(200).json(isProduct);
   }
 
   async getProductById(req, res) {
