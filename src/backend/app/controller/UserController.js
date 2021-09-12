@@ -4,6 +4,30 @@ import User from "../model/User";
 class UserController {
 
   async postClient(req, res) {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Cria um novo usuário' */
+
+        /* #swagger.parameters['user'] = { 
+           in: 'body',
+           description: 'Informações do usuário',
+           required: true,
+           schema: { 
+             "name": "Natália Alpino",
+             "email": "nathy.alpino1@gmail.com",
+             "cpf": "000.000.000-000", 
+             "password": "pass", 
+             "birth_date": "2021-09-11", 
+             "postal_code": "14403-075", 
+             "state": "SP", 
+             "contact": "", 
+             "city": "Franca", 
+             "district": "Street", 
+             "number_house": 2390, 
+             "street": "José Marcelo Leite", 
+             "complement": "", 
+             "is_admin": false
+             }
+    } */
 
     const userExists = await User.findOne({
       where: {
@@ -12,7 +36,7 @@ class UserController {
     })
 
     if (userExists) {
-      return res.status(401).json({
+      return res.status(409).json({
         message: "User already exists!"
       })
     }
@@ -31,6 +55,9 @@ class UserController {
   };
   async getAllClients(req, res) {
 
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Lista os usuários' */
+
     const isClient = await User.findAll({
       where: {
         is_admin: false
@@ -43,6 +70,9 @@ class UserController {
   }
 
   async getById(req, res) {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Lista um usuário por Id' */
+
     const { id } = req.params;
 
     const isClientId = await User.findOne({
@@ -54,9 +84,10 @@ class UserController {
       'state', 'city', 'district', 'number_house', 'street', 'complement', 'is_admin', 
       'password_hash', 'createdAt', 'updatedAt'] },
     })
+
     if(!isClientId){
-      return res.status(400).json({
-        message: "User already exists!"
+      return res.status(404).json({
+        message: "User not found!"
       })
     }
     return res.status(200).json(isClientId);
@@ -64,10 +95,40 @@ class UserController {
 
   async updateById(req, res){
 
+    try {
+    /* 	#swagger.tags = ['User']
+        #swagger.description = 'Atualiza um usuário' */
+
+    /* 
+      #swagger.parameters['id'] = { description: 'User ID' }
+    */
+
+    /* #swagger.parameters['user'] = { 
+           in: 'body',
+           description: 'Informações do usuário',
+           required: true,
+           schema: { 
+             "name": "Natália Alpino",
+             "$email": "nathy.alpino1@gmail.com",
+             "cpf": "000.000.000-000", 
+             "$oldPassword": "pass", 
+             "birth_date": "2021-09-11", 
+             "postal_code": "14403-075", 
+             "state": "SP", 
+             "contact": "", 
+             "city": "Franca", 
+             "district": "Street", 
+             "number_house": 2390, 
+             "street": "José Marcelo Leite", 
+             "complement": "", 
+             "is_admin": false
+             }
+    } */
+
     const schema = Yup.object().shape({
       name: Yup.string(),
-      email: Yup.string().email(),
-      oldPassword: Yup.string().min(6),
+      email: Yup.string().email().required(),
+      oldPassword: Yup.string().min(6).required(),
       contact: Yup.string(),
       postal_code: Yup.string(),
       state: Yup.string(),
@@ -84,22 +145,16 @@ class UserController {
       // ),
     })
 
-    if(!(await schema.isValid(req.body))){
-      return res.status(401).json({ 
-        message: 'Validation failed!'
-      })
-    }
-
-    // console.log(req.userEmail)
+    
+    await schema.validate(req.body).catch(err => {
+      throw res.status(400).json({
+        message: err.message
+      })  
+    })
 
     const { email, oldPassword } = req.body;
-
     const {id} = req.query
-    console.log(id)
-
     const user = await User.findByPk(id)
-    console.log(email)
-    console.log(user)
 
     if(email !== user.email){
       const userExists = await User.findOne({ where: { email }})
@@ -126,6 +181,9 @@ class UserController {
       complement, 
       postal_code 
     });
+    } catch (err) {
+      throw err
+    }
   };
 
 
