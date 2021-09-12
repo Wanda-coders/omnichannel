@@ -14,8 +14,8 @@ class AuthController {
             description: 'Informações de autenticação',
             required: true,
             schema: {
-              "email": "nathy.alpino1@gmail.com",
-              "password": "pass"
+                "email": "nathy.alpino1@gmail.com",
+                "password": "pass"
             }
         }
     */

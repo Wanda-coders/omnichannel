@@ -56,6 +56,26 @@ class InventoryController {
   };
 
   async getInventory(req, res) {
+
+  /*
+    #swagger.tags = ['Inventory']
+    #swagger.description = 'Consulta dados de estoque'
+
+    #swagger.parameters['catalog_id'] = {
+        in: 'query',
+        description: 'Catalog_id para filtrar dados de estoque',
+        required: false,
+        type: 'integer',
+    }
+
+    #swagger.parameters['store_id'] = {
+        in: 'query',
+        description: 'Store_id para filtrar dados de estoque',
+        required: false,
+        type: 'integer',
+    }
+  */
+
     const { catalog_id, store_id } = req.query;
     let inventoryResults;
     if ((catalog_id !== undefined) & (store_id !== undefined)) {

@@ -123,11 +123,11 @@ class UserController {
           }
 
           #swagger.parameters['obj'] = {
-             in: 'body',
-             description: 'User data.',
-             required: true,
-             type: 'string',
-             schema: {
+            in: 'body',
+            description: 'User data.',
+            required: true,
+            type: 'string',
+            schema: {
                 "name": "Natália Alpino",
                 "email": "nathy.alpino1@gmail.com",
                 "oldPassword": "pass",
