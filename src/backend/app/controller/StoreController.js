@@ -3,7 +3,10 @@ import Store from '../model/Store'
 
 class StoreController{
   async postStore(req, res) {
-
+  /* 	
+    #swagger.tags = ['Store']
+    #swagger.description = 'Cria uma nova loja' 
+  */
     const storeExists = await Store.findOne({
        where: { 
          name: req.body.name 
@@ -19,10 +22,22 @@ class StoreController{
   };
 
   async getAllStores(req, res){
+
+  /* 	
+    #swagger.tags = ['Store']
+    #swagger.description = 'Cria uma nova loja' 
+  */
    const isStore = await Store.findAll()
    return res.status(200).json(isStore);
   };
+
+
+
   async getStoreById(req, res) {
+      /* 	
+    #swagger.tags = ['Store']
+    #swagger.description = 'Cria uma nova loja' 
+  */
     const { id } = req.params;
 
     const isStoreId = await Store.findOne({

@@ -33,6 +33,7 @@ routes.get('/catalog/:id', CatalogController.getCatalogById);
 
 
 // pedido
+
 routes.post('/store', UserController.postClient);
 routes.get('/store', UserController.getAllClients);
 routes.get('/store/:id', UserController.getById);
