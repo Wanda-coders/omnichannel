@@ -40,15 +40,6 @@ class CatalogController {
     return res.status(200).json(isCatalog);
   };
 
-  async getCatalogById_standalone(id) {
-    const isCatalogId = await Catalog.findOne({
-      where: {
-        id,
-      },
-    })
-    return isCatalogId
-  };
-
   async getCatalogById(req, res) {
     const { id } = req.params;
 
@@ -57,6 +48,9 @@ class CatalogController {
         id,
       },
     })
+    if (res === undefined) {
+      return isCatalogId
+    }
     if(!isCatalogId){
       return res.status(400).json({
         message: "No Product found with this id!"

@@ -41,7 +41,7 @@ class OrderController {
     function getCategories(product_list) {
       const promises = product_list.map(
         async function (element) {
-          const result2 = await CatalogController.getCatalogById_standalone(element.id).then(function(res) {
+          const result2 = await CatalogController.getCatalogById({"params": element}).then(function(res) {
             return res.category
           });
           return result2
