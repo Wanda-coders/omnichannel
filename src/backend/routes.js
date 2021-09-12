@@ -49,10 +49,11 @@ routes.get('/store', UserController.getAllClients);
 routes.get('/store/:id', UserController.getById);
 
 //product
+routes.get('/product', ProductController.getAllProduct);
 routes.post('/product', ProductController.postProduct);
 
 // pedido
-routes.post('/purchase', OrderController.postPurchase);
+routes.post('/order', OrderController.postOrder);
 routes.get('/order', OrderController.getOrderById);
 
 export default routes;

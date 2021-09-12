@@ -10,9 +10,8 @@ class Product extends Model {
     return this;
   }
   static associate(models) {
-    this.belongsTo(models.Inventory, { foreignKey: 'inventory_id', as: 'inventories'});
     this.belongsTo(models.Catalog, { foreignKey: 'catalog_id', as: 'catalogs'});
-    this.belongsTo(models.Store, { foreignKey: 'store_id', as: 'stores'});
+    this.belongsTo(models.Order, { foreignKey: 'order_id', as: 'orders'});
   }
 }
 
