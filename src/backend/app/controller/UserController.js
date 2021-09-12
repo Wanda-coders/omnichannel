@@ -56,6 +56,7 @@ class UserController {
     });
 
   };
+
   async getAllClients(req, res) {
 
   /*
@@ -72,7 +73,7 @@ class UserController {
       'password_hash', 'createdAt', 'updatedAt'] },
     })
     return res.status(200).json(isClient);
-  }
+  };
 
   async getById(req, res) {
 
@@ -99,7 +100,7 @@ class UserController {
       })
     }
     return res.status(200).json(isClientId);
-  }
+  };
 
   async updateById(req, res){
     try {
@@ -122,11 +123,11 @@ class UserController {
           }
 
           #swagger.parameters['obj'] = {
-             in: 'body',
-             description: 'User data.',
-             required: true,
-             type: 'string',
-             schema: {
+            in: 'body',
+            description: 'User data.',
+            required: true,
+            type: 'string',
+            schema: {
                 "name": "Natália Alpino",
                 "email": "nathy.alpino1@gmail.com",
                 "oldPassword": "pass",

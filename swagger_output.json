@@ -465,8 +465,8 @@
           "200": {
             "description": "OK"
           },
-          "409": {
-            "description": "Conflict"
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -504,8 +504,8 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Bad Request"
+          "401": {
+            "description": "Unauthorized"
           },
           "409": {
             "description": "Conflict"
@@ -516,35 +516,29 @@
         "tags": [
           "Inventory"
         ],
-        "description": "Lista os produtos do estoque",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/inventory/{id}": {
-      "get": {
-        "tags": [
-          "Inventory"
-        ],
-        "description": "Lista um produto do estoque pelo ID",
+        "description": "Consulta dados de estoque",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "name": "catalog_id",
+            "in": "query",
+            "description": "Catalog_id para filtrar dados de estoque",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "store_id",
+            "in": "query",
+            "description": "Store_id para filtrar dados de estoque",
+            "required": false,
+            "type": "integer"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -565,68 +559,94 @@
             "type": "file",
             "required": "true",
             "description": "Insira a foto..."
+          },
+          {
+            "name": "catalog_id",
+            "in": "query",
+            "type": "string"
           }
         ],
-        "responses": {}
-      }
-    },
-    "/product": {
-      "get": {
-        "tags": [
-          "Product"
-        ],
-        "description": "Lista todos os produtos",
-        "parameters": [],
         "responses": {
-          "200": {
-            "description": "OK"
+          "400": {
+            "description": "Bad Request"
           }
         }
-      },
+      }
+    },
+    "/order": {
       "post": {
-        "tags": [
-          "Product"
-        ],
-        "description": "Cria um novo produto",
+        "tags": [],
+        "description": "",
         "parameters": [
           {
-            "name": "product",
+            "name": "obj",
             "in": "body",
-            "description": "Informações do producto",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "catalog_id": {
-                  "type": "number",
-                  "example": 1
+                "date_purchase": {
+                  "example": "any"
+                },
+                "product_list": {
+                  "example": "any"
+                },
+                "user_id": {
+                  "example": "any"
                 },
                 "store_id": {
-                  "type": "number",
-                  "example": 1
+                  "example": "any"
                 },
-                "price": {
-                  "type": "number",
-                  "example": 10
-                },
-                "inventory_id": {
-                  "type": "number",
-                  "example": 1
-                },
-                "quantity": {
-                  "type": "number",
-                  "example": 5
+                "...data": {
+                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/order/{id}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/orderByClient/{id}": {
+      "get": {
+        "tags": [],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }

@@ -1,5 +1,5 @@
 import Photo from '../model/Photo';
-import Product from '../model/Product';
+import Catalog from '../model/Catalog';
 
 class PhotosControllers {
 
@@ -17,26 +17,43 @@ class PhotosControllers {
         } */
 
         const { originalname: image_name, filename: path } = req.file;
+        const { catalog_id } = req.query;
 
+        if (catalog_id === undefined) {
+            return res.status(400).json({
+                message: "You must select a catalog_id!"
+            })
+        }
+        const isCatalogId = await Catalog.findOne({
+            where: {
+                id: catalog_id,
+            },
+        })
+        if(!isCatalogId) {
+            return res.status(400).json({
+                message: "No Product found with this id!"
+            })
+        }
+    
         const { id, url } = await Photo.create({
             image_name,
             path,
+            catalog_id,
         })
-
-        const sendImage = await Product.findOne({
-            where: {
-                id
-            }
-        })
-
-        sendImage.update({ photo_id: id })
 
         return res.json({
-            image_name,
+            id,
             url,
-            path
+            image_name,
+            path,
+            catalog_id,
         })
     }
+
+    async getAllPhotos(req, res) {
+        const isPhoto = await Photo.findAll()
+        return res.status(200).json(isPhoto);
+    };
 }
 
 export default new PhotosControllers();

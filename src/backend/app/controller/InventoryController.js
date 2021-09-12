@@ -22,27 +22,29 @@ class InventoryController {
     }
   */
 
+    const { quantity } = req.body
+    if (quantity < 0) {
+      return res.status(401).json({
+        message: "Quantity cannot be negative!"
+      })
+    }
     const inventoryExists = await Inventory.findOne({
       where: {
         catalog_id: req.body.catalog_id,
+        store_id: req.body.store_id
       }
     })
-
     if (inventoryExists) {
       return res.status(409).json({
         message: "Inventory already exists!"
       })
     }
+    const {
+      id,
+      catalog_id,
+      store_id,
+    } = await Inventory.create(req.body)
 
-    const { quantity } = req.body
-
-    if (quantity <= 0) {
-      return res.status(400).json({
-        message: "Quantity must be bigger than zero!"
-      })
-    }
-
-    const { id, catalog_id, store_id } = await Inventory.create(req.body)
 
     return res.json({
       id,
@@ -52,39 +54,63 @@ class InventoryController {
     });
 
   };
-  async getAllInventory(req, res) {
+
+  async getInventory(req, res) {
 
   /*
     #swagger.tags = ['Inventory']
-    #swagger.description = 'Lista os produtos do estoque'
+    #swagger.description = 'Consulta dados de estoque'
+
+    #swagger.parameters['catalog_id'] = {
+        in: 'query',
+        description: 'Catalog_id para filtrar dados de estoque',
+        required: false,
+        type: 'integer',
+    }
+
+    #swagger.parameters['store_id'] = {
+        in: 'query',
+        description: 'Store_id para filtrar dados de estoque',
+        required: false,
+        type: 'integer',
+    }
   */
 
-    const isInventory = await Inventory.findAll()
-    return res.status(200).json(isInventory);
-  }
-
-  async getInventoryById(req, res) {
-
-  /*
-    #swagger.tags = ['Inventory']
-    #swagger.description = 'Lista um produto do estoque pelo ID'
-  */
-
-    const { id } = req.params;
-
-    const isInventoryId = await Inventory.findOne({
-      where: {
-        id,
-      },
-    })
-    if (!isInventoryId) {
-      return res.status(400).json({
-        message: "Inventory already exists!"
+    const { catalog_id, store_id } = req.query;
+    let inventoryResults;
+    if ((catalog_id !== undefined) & (store_id !== undefined)) {
+      inventoryResults = await Inventory.findAll({
+        where: {
+          catalog_id: catalog_id,
+          store_id: store_id
+        },
       })
     }
-    return res.status(200).json(isInventoryId);
-  }
-
+    else if (catalog_id !== undefined) {
+      inventoryResults = await Inventory.findAll({
+        where: {
+          catalog_id: catalog_id,
+        },
+      })
+    }
+    else if (store_id !== undefined) {
+      inventoryResults = await Inventory.findAll({
+        where: {
+          store_id: store_id,
+        },
+      })
+    }
+    else {
+      inventoryResults = await Inventory.findAll()
+    }
+    inventoryResults = inventoryResults.filter((element) => element.quantity > 0)
+    if (!inventoryResults) {
+      return res.status(404).json({
+        message: "Inventory not found!"
+      })
+    }
+    return res.status(200).json(inventoryResults);
+  };
 }
 
 export default new InventoryController();

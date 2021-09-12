@@ -13,13 +13,12 @@ class App {
     this.cors = cors()
     this.middleware();   
     this.routes();
-  
   }
 
   middleware() {
     this.server.use(express.json());
     this.server.use(cors());
-    this.server.use('/store', express.static(path.resolve(__dirname, '..','..', '..', 'tmp', 'uploads')))   
+    this.server.use('/storage', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads')))
   }
 
   routes() {

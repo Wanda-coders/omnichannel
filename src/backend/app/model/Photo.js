@@ -8,12 +8,15 @@ class Photo extends Model {
       url: {
         type: Sequelize.VIRTUAL,
         get() {
-          return `http://localhost:3000/photos/${this.path}`
+          return `http://localhost:3000/storage/${this.path}`
         }
       }
     },
     { sequelize });
     return this;
+  }
+  static associate(models){
+    this.belongsTo( models.Catalog, { foreignKey: 'catalog_id', as: 'catalogs'})
   }
 }
 

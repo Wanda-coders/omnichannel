@@ -51,6 +51,7 @@ class CatalogController {
     });
 
   };
+
   async getAllCatalog(req, res) {
 
   /*
@@ -60,17 +61,8 @@ class CatalogController {
 
     const isCatalog = await Catalog.findAll()
     return res.status(200).json(isCatalog);
-  }
+  };
 
-  /*ESTÁ REDUNDANTE, PODE SER REMOVIDO? */
-  async getCatalogById_standalone(id) {
-    const isCatalogId = await Catalog.findOne({
-      where: {
-        id,
-      },
-    })
-    return isCatalogId
-  }
 
   async getCatalogById(req, res) {
 
@@ -86,13 +78,16 @@ class CatalogController {
         id,
       },
     })
+    if (res === undefined) {
+      return isCatalogId
+    }
     if(!isCatalogId){
-      return res.status(409).json({
-        message: "Catalog already exists!"
+      return res.status(404).json({
+        message: "No Product found with this id!"
       })
     }
     return res.status(200).json(isCatalogId);
-  }
+  };
 
 }
 

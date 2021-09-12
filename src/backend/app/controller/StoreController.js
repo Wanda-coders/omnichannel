@@ -27,10 +27,10 @@ class StoreController{
   */
 
     const storeExists = await Store.findOne({
-       where: {
-         name: req.body.name
-        }
-      });
+      where: {
+        name: req.body.name
+      }
+    });
 
     if(storeExists){
       return res.status(409).json('Loja já cadastrada');
@@ -50,8 +50,6 @@ class StoreController{
    const isStore = await Store.findAll()
    return res.status(200).json(isStore);
   };
-
-
 
   async getStoreById(req, res) {
 
@@ -75,7 +73,7 @@ class StoreController{
       })
     }
     return res.status(200).json(isStoreId);
-  }
+  };
 }
 
 export default new StoreController();
