@@ -27,6 +27,12 @@ const doc = {
     }, {
         "name": "Authentication",
         "description": "Autenticação de usuário"
+    }, {
+        "name": "Inventory",
+        "description": "Rotas referente o estoque"
+    }, {
+        "name": "Product",
+        "description": "Rotas referente os produtos"
     }
 ]
 }
