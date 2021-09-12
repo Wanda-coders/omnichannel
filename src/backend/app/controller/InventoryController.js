@@ -4,7 +4,7 @@ import Inventory from "../model/Inventory";
 class InventoryController {
 
   async postInventory(req, res) {
- 
+
   /*
     #swagger.tags = ['Inventory']
     #swagger.description = 'Adciona um produto no estoque'
@@ -21,7 +21,7 @@ class InventoryController {
       }
     }
   */
-    
+
     const { quantity } = req.body
     if (quantity < 0) {
       return res.status(401).json({
@@ -35,7 +35,7 @@ class InventoryController {
       }
     })
     if (inventoryExists) {
-      return res.status(401).json({
+      return res.status(409).json({
         message: "Inventory already exists!"
       })
     }

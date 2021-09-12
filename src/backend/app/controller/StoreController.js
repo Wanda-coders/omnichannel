@@ -27,8 +27,8 @@ class StoreController{
   */
 
     const storeExists = await Store.findOne({
-      where: { 
-        name: req.body.name 
+      where: {
+        name: req.body.name
       }
     });
 
