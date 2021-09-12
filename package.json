@@ -1,14 +1,16 @@
 {
   "name": "omnichannel",
   "version": "1.0.0",
-  "description": "Teste",
+  "description": "backend referente ao omnichannel do Luiza < Code >",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/backend/server.js",
+    "dev": "npm run swagger && nodemon src/backend/server.js",
+    "swagger": "node ./swagger.js",
     "undo": "npx sequelize db:migrate:undo:all",
     "migrate": "npx sequelize db:migrate",
-    "seed": "npx sequelize-cli db:seed:all"
+    "seed": "npx sequelize-cli db:seed:all",
+    "db:migrate": "npx sequelize-cli db:migrate"
   },
   "repository": {
     "type": "git",
@@ -30,6 +32,7 @@
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.6.5",
+    "swagger-autogen": "^2.11.2",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6",
     "yup": "^0.32.9"
