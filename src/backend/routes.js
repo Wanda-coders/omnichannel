@@ -49,6 +49,7 @@ routes.get('/store', UserController.getAllClients);
 routes.get('/store/:id', UserController.getById);
 
 //product
+routes.get('/product', ProductController.getAllProduct);
 routes.post('/product', ProductController.postProduct);
 
 // pedido

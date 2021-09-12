@@ -1,5 +1,6 @@
 
 import Order from "../model/Order";
+import Product from "../model/Product";
 import CatalogController from "./CatalogController";
 
 function hasDuplicates(array) {
@@ -68,6 +69,14 @@ class OrderController {
       final_price: final_price
     })
 
+    for (var i = 0; i < req.body.product_list.length; i++){
+      const productCreated = await Product.create({
+        "order_id": orderCreated.id,
+        "catalog_id": req.body.product_list[i].id,
+        "price": req.body.product_list[i].price,
+        "quantity": req.body.product_list[i].quantity,
+      })
+    }
     return res.json(orderCreated);
   };
 
