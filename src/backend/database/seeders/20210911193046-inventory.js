@@ -1,18 +1,155 @@
 'use strict';
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  up: async (queryInterface, _Sequelize) => {
     await queryInterface.bulkInsert('inventories', [{
       id: 1,
       quantity: 20,
       catalog_id: 1,
-      //store_id
+      store_id: 1,
       created_at: new Date(),
       updated_at: new Date(),
-    }], {});
+    },
+    {
+      id: 2,
+      quantity: 10,
+      catalog_id: 1,
+      store_id: 2,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 3,
+      quantity: 5,
+      catalog_id: 1,
+      store_id: 3,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 4,
+      quantity: 15,
+      catalog_id: 2,
+      store_id: 1,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 5,
+      quantity: 10,
+      catalog_id: 2,
+      store_id: 2,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 6,
+      quantity: 5,
+      catalog_id: 2,
+      store_id: 3,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 7,
+      quantity: 20,
+      catalog_id: 3,
+      store_id: 1,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 8,
+      quantity: 10,
+      catalog_id: 3,
+      store_id: 2,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 9,
+      quantity: 5,
+      catalog_id: 3,
+      store_id: 3,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 10,
+      quantity: 20,
+      catalog_id: 4,
+      store_id: 1,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 11,
+      quantity: 10,
+      catalog_id: 4,
+      store_id: 2,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 12,
+      quantity: 5,
+      catalog_id: 4,
+      store_id: 3,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 13,
+      quantity: 20,
+      catalog_id: 5,
+      store_id: 1,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 14,
+      quantity: 10,
+      catalog_id: 5,
+      store_id: 2,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 15,
+      quantity: 5,
+      catalog_id: 5,
+      store_id: 3,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 16,
+      quantity: 20,
+      catalog_id: 6,
+      store_id: 1,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 17,
+      quantity: 10,
+      catalog_id: 6,
+      store_id: 2,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      id: 18,
+      quantity: 5,
+      catalog_id: 6,
+      store_id: 3,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+  ], {});
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface, _Sequelize) => {
     await queryInterface.bulkDelete('inventories', null, {});
   }
 };
