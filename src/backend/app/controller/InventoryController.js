@@ -4,7 +4,24 @@ import Inventory from "../model/Inventory";
 class InventoryController {
 
   async postInventory(req, res) {
+ 
+  /*
+    #swagger.tags = ['Inventory']
+    #swagger.description = 'Adciona um produto no estoque'
 
+    #swagger.parameters['inventory'] = {
+        in: 'body',
+        description: 'Dados do inventário/estoque',
+        required: true,
+        type: 'string',
+        schema: {
+          "quantity": 10,
+          "catalog_id": 2,
+          "store_id": 1,
+      }
+    }
+  */
+    
     const { quantity } = req.body
     if (quantity < 0) {
       return res.status(401).json({
@@ -27,6 +44,7 @@ class InventoryController {
       catalog_id,
       store_id,
     } = await Inventory.create(req.body)
+
 
     return res.json({
       id,

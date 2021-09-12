@@ -5,6 +5,24 @@ class CatalogController {
 
   async postCatalog(req, res) {
 
+  /*
+    #swagger.tags = ['Catalog']
+    #swagger.description = 'Cria um novo produto no catálogo'
+
+    #swagger.parameters['catalog'] = {
+        in: 'body',
+        description: 'Dados do catálogo',
+        required: true,
+        type: 'string',
+        schema: {
+          "name": "Funko",
+          "description": "Mulher-Maravilha",
+          "unit_value": "75.00",
+          "category": "Colecionáveis"
+      }
+    }
+  */
+
     const catalogExists = await Catalog.findOne({
       where: {
         name: req.body.name
@@ -12,7 +30,7 @@ class CatalogController {
     })
 
     if (catalogExists) {
-      return res.status(401).json({
+      return res.status(409).json({
         message: "Catalog already exists!"
       })
     }
@@ -24,7 +42,7 @@ class CatalogController {
       category,
     } = await Catalog.create(req.body)
 
-    return res.json({
+    return res.status(201).json({
       id,
       name,
       description,
@@ -36,11 +54,23 @@ class CatalogController {
 
   async getAllCatalog(req, res) {
 
+  /*
+    #swagger.tags = ['Catalog']
+    #swagger.description = 'Lista os produtos disponíveis'
+  */
+
     const isCatalog = await Catalog.findAll()
     return res.status(200).json(isCatalog);
   };
 
+
   async getCatalogById(req, res) {
+
+  /*
+    #swagger.tags = ['Catalog']
+    #swagger.description = 'Lista um produto pelo ID'
+  */
+
     const { id } = req.params;
 
     const isCatalogId = await Catalog.findOne({
@@ -52,7 +82,7 @@ class CatalogController {
       return isCatalogId
     }
     if(!isCatalogId){
-      return res.status(400).json({
+      return res.status(404).json({
         message: "No Product found with this id!"
       })
     }

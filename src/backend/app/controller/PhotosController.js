@@ -2,7 +2,20 @@ import Photo from '../model/Photo';
 import Catalog from '../model/Catalog';
 
 class PhotosControllers {
+
     async store(req, res) {
+        /*
+        #swagger.tags = ['Photos']
+        #swagger.description = 'Salva uma novo foto'
+
+        #swagger.consumes = ['multipart/form-data']
+        #swagger.parameters['photo'] = {
+            in: 'formData',
+            type: 'file',
+            required: 'true',
+            description: 'Insira a foto...',
+        } */
+
         const { originalname: image_name, filename: path } = req.file;
         const { catalog_id } = req.query;
 

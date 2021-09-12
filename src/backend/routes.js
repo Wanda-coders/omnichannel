@@ -11,7 +11,7 @@ import StoreController from './app/controller/StoreController';
 import CatalogController from './app/controller/CatalogController';
 import InventoryController from './app/controller/InventoryController';
 import PhotosController from './app/controller/PhotosController';
-import OrderController from './app/controller/OrderController';
+//import OrderController from './app/controller/OrderController';
 import ProductController from './app/controller/ProductController';
 
 const routes = new Router();
@@ -45,15 +45,13 @@ routes.get('/inventory', InventoryController.getInventory);
 
 // fotos
 routes.post('/photos', upload.single('photo'), PhotosController.store);
-routes.get('/photos', PhotosController.getAllPhotos);
-// routes.post('/photos', PhotosController.store);
 
 //product
 routes.get('/product', ProductController.getAllProduct);
 routes.post('/product', ProductController.postProduct);
 
 // pedido
-routes.post('/order', OrderController.postOrder);
-routes.get('/order', OrderController.getOrderById);
+//routes.post('/order', OrderController.postOrder);
+//routes.get('/order', OrderController.getOrderById);
 
 export default routes;
