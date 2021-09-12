@@ -45,9 +45,8 @@ routes.get('/inventory', InventoryController.getInventory);
 
 // fotos
 routes.post('/photos', upload.single('photo'), PhotosController.store);
+routes.get('/photos', PhotosController.getAllPhotos);
 // routes.post('/photos', PhotosController.store);
-routes.get('/store', UserController.getAllClients);
-routes.get('/store/:id', UserController.getById);
 
 //product
 routes.get('/product', ProductController.getAllProduct);
