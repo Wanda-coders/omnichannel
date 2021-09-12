@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/backend/server.js"
+    "dev": "nodemon src/backend/server.js",
+    "undo": "npx sequelize db:migrate:undo:all",
+    "migrate": "npx sequelize db:migrate",
+    "seed": "npx sequelize-cli db:seed:all"
   },
   "repository": {
     "type": "git",
