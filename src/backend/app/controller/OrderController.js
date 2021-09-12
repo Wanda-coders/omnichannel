@@ -7,20 +7,20 @@ function hasDuplicates(array) {
   return (new Set(array)).size !== array.length;
 }
 
+
 class OrderController {
 
-  async getAllByIdCliente(req, res) {
-
-    const {id} = req.params
-
-    const orderUser = await Order.findAll({  
-      where: {
-       id: req.body.user_id
-      }
-    })
-    return res.status(200).json(orderUser);
+  async getOrders(orderUser) {
+    const promises = orderUser.map(
+      async function (element) {
+        const result2 = await this.getOrderById({"params": element}).then(function(res) {
+          return res
+        });
+        return result2
+    });
+    return Promise.all(promises);
   }
-
+  
   async postOrder(req, res) {
 
     const date = new Date()
@@ -86,24 +86,76 @@ class OrderController {
       })
     }
     return res.json(orderCreated);
-  };
+  }
 
   async getOrderById(req, res) {
   
-    const {user_id} = req.body
+    const {id: order_id} = req.params
 
-    const isInventoryId = await Order.findAll({
+    const isOrder = await Order.findOne({
       where: {
-        user_id: req.body.user_id
+        id: order_id
       },
     })
-    if (!isInventoryId) {
-      return res.status(400).json({
-        message: "Inventory already exists!"
+    console.log(isOrder)
+    if (!isOrder) {
+      return res.status(404).json({
+        message: "Order not found!"
       })
     }
-    return res.status(200).json(isInventoryId);
+
+    const product_list = await Product.findAll({
+      where: {
+        order_id: order_id
+      },
+      attributes: { exclude: ['createdAt', 'updatedAt', 'id', 'order_id'] },
+    })
+
+    const returnObject = {
+      order_id: order_id,
+      user_id: isOrder.user_id,
+      store_id: isOrder.store_id,
+      status_purchase: isOrder.status_purchase,
+      date_purchase: isOrder.date_purchase,
+      delivery_status: isOrder.delivery_status,
+      final_price: isOrder.final_price,
+      product_list: product_list,
+    }
+
+    if (res === undefined) {
+      return returnObject
+    }
+    return res.status(200).json(returnObject);
   }
+  
+  async getAllByIdCliente(req, res) {
+
+    const {id: userId} = req.params
+
+    const orderUser = await Order.findAll({  
+      where: {
+        user_id: userId
+      }
+    })
+    console.log(orderUser)
+    console.log(this)
+
+    // let order_list = [];
+    // for (var i = 0; i < orderUser.length; i++){
+    //     console.log(this)
+    //     console.log(OrderController)
+    //     this_order = await OrderController.getOrderById({"params": {"id": orderUser[i].id}}).then(function(res) {
+    //     return res
+    //   });
+    //   order_list.push(this_order)
+    // }
+    const order_list = await this.getOrders(orderUser);
+
+    if (res === undefined) {
+      return order_list
+    }
+    return res.status(200).json(order_list);
+  };
 
 }
 
