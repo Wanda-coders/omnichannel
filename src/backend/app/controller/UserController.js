@@ -4,30 +4,33 @@ import User from "../model/User";
 class UserController {
 
   async postClient(req, res) {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Cria um novo usuário' */
 
-        /* #swagger.parameters['user'] = {
-           in: 'body',
-           description: 'Informações do usuário',
-           required: true,
-           schema: {
-             "name": "Natália Alpino",
-             "email": "nathy.alpino1@gmail.com",
-             "cpf": "000.000.000-000",
-             "password": "pass",
-             "birth_date": "2021-09-11",
-             "postal_code": "14403-075",
-             "state": "SP",
-             "contact": "",
-             "city": "Franca",
-             "district": "Street",
-             "number_house": 2390,
-             "street": "José Marcelo Leite",
-             "complement": "",
-             "is_admin": false
-             }
-    } */
+  /*
+    #swagger.tags = ['User']
+    #swagger.description = 'Cria um novo usuário'
+
+    #swagger.parameters['user'] = {
+        in: 'body',
+        description: 'Informações do usuário',
+        required: true,
+        schema: {
+          "name": "Natália Alpino",
+          "email": "nathy.alpino1@gmail.com",
+          "cpf": "000.000.000-000",
+          "password": "pass",
+          "birth_date": "2021-09-11",
+          "postal_code": "14403-075",
+          "state": "SP",
+          "contact": "",
+          "city": "Franca",
+          "district": "Street",
+          "number_house": 2390,
+          "street": "José Marcelo Leite",
+          "complement": "",
+          "is_admin": false
+        }
+    }
+  */
 
     const userExists = await User.findOne({
       where: {
@@ -55,8 +58,10 @@ class UserController {
   };
   async getAllClients(req, res) {
 
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Lista os usuários' */
+  /*
+  #swagger.tags = ['User']
+  #swagger.description = 'Lista os usuários'
+  */
 
     const isClient = await User.findAll({
       where: {
@@ -70,10 +75,11 @@ class UserController {
   }
 
   async getById(req, res) {
-    /*
+
+  /*
     #swagger.tags = ['User']
     #swagger.description = 'Lista um usuário por Id'
-    */
+  */
 
     const { id } = req.params;
 
@@ -97,44 +103,45 @@ class UserController {
 
   async updateById(req, res){
     try {
-            /*
-            #swagger.tags = ['User']
-            #swagger.description = 'Atualiza um usuário'
 
-            #swagger.auto = false
-            #swagger.path = '/user/{id}'
-            #swagger.method = 'put'
-            #swagger.produces = ['application/json']
-            #swagger.consumes = ['application/json']
+    /*
+      #swagger.tags = ['User']
+      #swagger.description = 'Atualiza um usuário'
 
-            #swagger.parameters['id'] = {
-                in: 'path',
-                description: 'User ID.',
-                required: true,
-                type: 'integer'
+        #swagger.auto = false
+        #swagger.path = '/user/{id}'
+        #swagger.method = 'put'
+        #swagger.produces = ['application/json']
+        #swagger.consumes = ['application/json']
+
+          #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'User ID.',
+            required: true,
+            type: 'integer'
+          }
+
+          #swagger.parameters['obj'] = {
+             in: 'body',
+             description: 'User data.',
+             required: true,
+             type: 'string',
+             schema: {
+                "name": "Natália Alpino",
+                "email": "nathy.alpino1@gmail.com",
+                "oldPassword": "pass",
+                "cpf": "000.000.000-000",
+                "contact": "",
+                "postal_code": "14403-075",
+                "state": "SP",
+                "city": "Franca",
+                "district": "Street",
+                "number_house": 2390,
+                "street": "José Marcelo Leite",
+                "complement": ""
             }
-
-            #swagger.parameters['obj'] = {
-                in: 'body',
-                description: 'User data.',
-                required: true,
-                type: 'string',
-                schema: {
-                  "name": "Natália Alpino",
-                  "email": "nathy.alpino1@gmail.com",
-                  "oldPassword": "pass",
-                  "cpf": "000.000.000-000",
-                  "contact": "",
-                  "postal_code": "14403-075",
-                  "state": "SP",
-                  "city": "Franca",
-                  "district": "Street",
-                  "number_house": 2390,
-                  "street": "José Marcelo Leite",
-                  "complement": ""
-                }
-            }
-        */
+          }
+    */
       const schema = Yup.object().shape({
         name: Yup.string(),
         email: Yup.string().email().required(),

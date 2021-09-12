@@ -10,11 +10,23 @@
   "tags": [
     {
       "name": "User",
-      "description": "CRUD referente ao usuário"
+      "description": "Rotas referente ao usuário"
     },
     {
       "name": "Store",
-      "description": "CRUD referente às lojas"
+      "description": "Rotas referente às lojas"
+    },
+    {
+      "name": "Catalog",
+      "description": "Rotas referente ao catálogo de produtos disponíveis"
+    },
+    {
+      "name": "Photos",
+      "description": "Rotas referente às fotos do catálogo de produtos disponíveis"
+    },
+    {
+      "name": "Authentication",
+      "description": "Autenticação de usuário"
     }
   ],
   "schemes": [
@@ -230,28 +242,40 @@
     },
     "/auth": {
       "post": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Autentica o usuário",
         "parameters": [
           {
-            "name": "obj",
+            "name": "auth",
             "in": "body",
+            "description": "Informações de autenticação",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "nathy.alpino1@gmail.com"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "pass"
                 }
               }
             }
           }
         ],
         "responses": {
+          "201": {
+            "description": "Created"
+          },
           "401": {
             "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -264,21 +288,59 @@
         "description": "Cria uma nova loja",
         "parameters": [
           {
-            "name": "obj",
+            "name": "Store",
             "in": "body",
+            "description": "Informações da Loja",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Loja São Joaquim"
+                },
+                "contact": {
+                  "type": "string",
+                  "example": "(11)1111-1111"
+                },
+                "postal_code": {
+                  "type": "string",
+                  "example": "14402-000"
+                },
+                "state": {
+                  "type": "string",
+                  "example": "SP"
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Franca"
+                },
+                "district": {
+                  "type": "string",
+                  "example": "São Joaquim"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "Rua São Jose"
+                },
+                "number": {
+                  "type": "string",
+                  "example": "1010"
+                },
+                "complement": {
+                  "type": "string",
+                  "example": ""
                 }
               }
             }
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized"
+          "201": {
+            "description": "Created"
+          },
+          "409": {
+            "description": "Conflict"
           }
         }
       },
@@ -286,7 +348,7 @@
         "tags": [
           "Store"
         ],
-        "description": "Cria uma nova loja",
+        "description": "Lista as lojas físicas",
         "parameters": [],
         "responses": {
           "200": {
@@ -300,7 +362,7 @@
         "tags": [
           "Store"
         ],
-        "description": "Cria uma nova loja",
+        "description": "Lista uma loja pelo ID",
         "parameters": [
           {
             "name": "id",
@@ -313,39 +375,62 @@
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
+          "404": {
+            "description": "Not Found"
           }
         }
       }
     },
     "/catalog": {
       "post": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Catalog"
+        ],
+        "description": "Cria um novo produto no catálogo",
         "parameters": [
           {
-            "name": "obj",
+            "name": "catalog",
             "in": "body",
+            "description": "Dados do catálogo",
+            "required": true,
+            "type": "string",
             "schema": {
               "type": "object",
               "properties": {
-                "name\r": {
-                  "example": "any"
+                "name": {
+                  "type": "string",
+                  "example": "Funko"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Mulher-Maravilha"
+                },
+                "unit_value": {
+                  "type": "string",
+                  "example": "75.00"
+                },
+                "category": {
+                  "type": "string",
+                  "example": "Colecionáveis"
                 }
               }
             }
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized"
+          "201": {
+            "description": "Created"
+          },
+          "409": {
+            "description": "Conflict"
           }
         }
       },
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Catalog"
+        ],
+        "description": "Lista os produtos disponíveis",
         "parameters": [],
         "responses": {
           "200": {
@@ -356,8 +441,10 @@
     },
     "/catalog/{id}": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Catalog"
+        ],
+        "description": "Lista um produto pelo ID",
         "parameters": [
           {
             "name": "id",
@@ -370,42 +457,58 @@
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
+          "409": {
+            "description": "Conflict"
           }
         }
       }
     },
     "/inventory": {
       "post": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Adciona um produto no estoque",
         "parameters": [
           {
-            "name": "obj",
+            "name": "inventory",
             "in": "body",
+            "description": "Dados do inventário/estoque",
+            "required": true,
+            "type": "string",
             "schema": {
               "type": "object",
               "properties": {
-                "catalog_id": {
-                  "example": "any"
+                "quantity": {
+                  "type": "number",
+                  "example": 10
                 },
-                "where": {
-                  "example": "any"
+                "catalog_id": {
+                  "type": "number",
+                  "example": 2
+                },
+                "store_id": {
+                  "type": "number",
+                  "example": 1
                 }
               }
             }
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized"
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
           }
         }
       },
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Lista os produtos do estoque",
         "parameters": [],
         "responses": {
           "200": {
@@ -416,8 +519,10 @@
     },
     "/inventory/{id}": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Lista um produto do estoque pelo ID",
         "parameters": [
           {
             "name": "id",
@@ -438,16 +543,31 @@
     },
     "/photos": {
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
+        "tags": [
+          "Photos"
+        ],
+        "description": "Salva uma novo foto",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "photo",
+            "in": "formData",
+            "type": "file",
+            "required": "true",
+            "description": "Insira a foto..."
+          }
+        ],
         "responses": {}
       }
     },
     "/product": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Product"
+        ],
+        "description": "Lista todos os produtos",
         "parameters": [],
         "responses": {
           "200": {
@@ -456,91 +576,46 @@
         }
       },
       "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [
-          {
-            "name": "obj",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "quantity": {
-                  "example": "any"
-                },
-                "catalog_id": {
-                  "example": "any"
-                }
-              }
-            }
-          }
+        "tags": [
+          "Product"
         ],
-        "responses": {
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/order": {
-      "post": {
-        "tags": [],
-        "description": "",
+        "description": "Cria um novo produto",
         "parameters": [
           {
-            "name": "obj",
+            "name": "product",
             "in": "body",
+            "description": "Informações do producto",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "date_purchase": {
-                  "example": "any"
-                },
-                "product_list": {
-                  "example": "any"
-                },
-                "user_id": {
-                  "example": "any"
+                "catalog_id": {
+                  "type": "number",
+                  "example": 1
                 },
                 "store_id": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 1
                 },
-                "...data": {
-                  "example": "any"
+                "price": {
+                  "type": "number",
+                  "example": 10
+                },
+                "inventory_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "quantity": {
+                  "type": "number",
+                  "example": 5
                 }
               }
             }
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      },
-      "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [
-          {
-            "name": "obj",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_id\r": {
-                  "example": "any"
-                },
-                "user_id": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"

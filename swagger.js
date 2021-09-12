@@ -14,11 +14,21 @@ const doc = {
     produces: ['application/json'],
     tags: [{
         "name": "User",
-        "description": "CRUD referente ao usuário"
+        "description": "Rotas referente ao usuário"
     }, {
         "name": "Store",
-        "description": "CRUD referente às lojas"
-    }]
+        "description": "Rotas referente às lojas"
+    }, {
+        "name": "Catalog",
+        "description": "Rotas referente ao catálogo de produtos disponíveis"
+    }, {
+        "name": "Photos",
+        "description": "Rotas referente às fotos do catálogo de produtos disponíveis"
+    }, {
+        "name": "Authentication",
+        "description": "Autenticação de usuário"
+    }
+]
 }
 
 const outputFile = './swagger_output.json'
