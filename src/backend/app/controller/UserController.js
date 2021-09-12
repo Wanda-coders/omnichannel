@@ -70,8 +70,10 @@ class UserController {
   }
 
   async getById(req, res) {
-    /* 	#swagger.tags = ['User']
-        #swagger.description = 'Lista um usuário por Id' */
+    /*
+    #swagger.tags = ['User']
+    #swagger.description = 'Lista um usuário por Id'
+    */
 
     const { id } = req.params;
 
