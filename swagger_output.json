@@ -244,46 +244,6 @@
         }
       }
     },
-    "/auth": {
-      "post": {
-        "tags": [
-          "Authentication"
-        ],
-        "description": "Autentica o usuário",
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "body",
-            "description": "Informações de autenticação",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "type": "string",
-                  "example": "nathy.alpino1@gmail.com"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "pass"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
     "/store": {
       "post": {
         "tags": [
@@ -502,9 +462,6 @@
         "responses": {
           "401": {
             "description": "Unauthorized"
-          },
-          "409": {
-            "description": "Conflict"
           }
         }
       },

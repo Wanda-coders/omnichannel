@@ -33,7 +33,7 @@ class StoreController{
     });
 
     if(storeExists){
-      return res.status(409).json('Loja já cadastrada');
+      return res.status(409).json('Store already registered');
     };
 
     const { id, name, contact, postal_code, state, city, district, address, number, complement } = await Store.create(req.body);

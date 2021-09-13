@@ -23,7 +23,7 @@ routes.get('/user/:id', UserController.getById);
 routes.put('/user', UserController.updateById);
 
 // auth
-routes.post('/auth', AuthController.store);
+// routes.post('/auth', AuthController.store);
 // routes.use(authMiddleware)
 
 // store

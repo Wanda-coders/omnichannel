@@ -1,4 +1,3 @@
-import * as Yup from 'yup'
 import Catalog from "../model/Catalog";
 import Photo from "../model/Photo";
 
@@ -35,8 +34,9 @@ class CatalogController {
         message: "Catalog already exists!"
       })
     }
+
+    
     const {
-      id,
       name,
       description,
       unit_value,
@@ -44,7 +44,7 @@ class CatalogController {
     } = await Catalog.create(req.body)
 
     return res.status(201).json({
-      id,
+     
       name,
       description,
       unit_value,
