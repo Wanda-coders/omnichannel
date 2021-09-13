@@ -143,6 +143,46 @@ class OrderController {
     }
     return res.status(200).json(order_list);
   };
+  
+  async updateStatusPurchase(req, res) {
+    const {id: order_id} = req.params
+
+    const isOrder = await Order.findOne({
+      where: {
+        id: order_id
+      },
+    })
+    if (!isOrder) {
+      return res.status(404).json({
+        message: "Order not found!"
+      })
+    }
+
+    const returnObject = await isOrder.update(
+      {"status_purchase": req.body.status_purchase}
+    )
+    return res.status(200).json(returnObject);
+  }
+
+  async updateDeliveryStatus(req, res) {
+    const {id: order_id} = req.params
+
+    const isOrder = await Order.findOne({
+      where: {
+        id: order_id
+      },
+    })
+    if (!isOrder) {
+      return res.status(404).json({
+        message: "Order not found!"
+      })
+    }
+
+    const returnObject = await isOrder.update(
+      {"delivery_status": req.body.delivery_status}
+    )
+    return res.status(200).json(returnObject);
+  }
 
 }
 
