@@ -114,6 +114,11 @@ class InventoryController {
 
   async getInventoryTotal(req, res) {
 
+  /*
+    #swagger.tags = ['Inventory']
+    #swagger.description = 'Lista o estoque total de um certo produto'
+  */
+
     const { id: catalog_id } = req.params;
     const inventoryResults = await Inventory.findAll({
       where: {

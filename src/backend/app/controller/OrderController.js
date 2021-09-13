@@ -8,8 +8,13 @@ function hasDuplicates(array) {
 }
 
 class OrderController {
-  
+
   async postOrder(req, res) {
+
+  /*
+    #swagger.tags = ['Order']
+    #swagger.description = 'Inicia um novo pedido'
+  */
 
     const date = new Date()
     if(req.body.date_purchase < date){
@@ -77,7 +82,12 @@ class OrderController {
   }
 
   async getOrderById(req, res) {
-  
+
+   /*
+    #swagger.tags = ['Order']
+    #swagger.description = 'Lista o pedido através do ID'
+  */
+
     const {id: order_id} = req.params
 
     const isOrder = await Order.findOne({
@@ -114,12 +124,17 @@ class OrderController {
     }
     return res.status(200).json(returnObject);
   }
-  
+
   async getAllByIdCliente(req, res) {
+
+  /*
+    #swagger.tags = ['Order']
+    #swagger.description = 'Lista o pedido através do ID do cliente'
+  */
 
     const {id: userId} = req.params
 
-    const orderUser = await Order.findAll({  
+    const orderUser = await Order.findAll({
       where: {
         user_id: userId
       }
@@ -143,8 +158,13 @@ class OrderController {
     }
     return res.status(200).json(order_list);
   };
-  
+
   async updateStatusPurchase(req, res) {
+
+  /*
+    #swagger.tags = ['Order']
+    #swagger.description = 'Atualiza o status do Pedido'
+  */
     const {id: order_id} = req.params
 
     const isOrder = await Order.findOne({
@@ -165,6 +185,11 @@ class OrderController {
   }
 
   async updateDeliveryStatus(req, res) {
+
+  /*
+    #swagger.tags = ['Order']
+    #swagger.description = 'Atualiza o status da entrega'
+  */
     const {id: order_id} = req.params
 
     const isOrder = await Order.findOne({
