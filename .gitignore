@@ -2,4 +2,7 @@ node_modules
 *.jpg
 *.jpeg
 *.png
+swagger_output.json
 package-lock.json
+.env
+
