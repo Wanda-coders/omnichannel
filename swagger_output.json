@@ -31,10 +31,6 @@
     {
       "name": "Inventory",
       "description": "Rotas referente o estoque"
-    },
-    {
-      "name": "Product",
-      "description": "Rotas referente os produtos"
     }
   ],
   "schemes": [
@@ -449,10 +445,8 @@
     },
     "/catalog/{id}": {
       "get": {
-        "tags": [
-          "Catalog"
-        ],
-        "description": "Lista um produto pelo ID",
+        "tags": [],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -461,14 +455,7 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
+        "responses": {}
       }
     },
     "/inventory": {
@@ -543,6 +530,30 @@
         }
       }
     },
+    "/inventoryTotal/{id}": {
+      "get": {
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Lista o estoque total de um certo produto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/photos": {
       "post": {
         "tags": [
@@ -575,8 +586,10 @@
     },
     "/order": {
       "post": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Order"
+        ],
+        "description": "Inicia um novo pedido",
         "parameters": [
           {
             "name": "obj",
@@ -612,8 +625,10 @@
     },
     "/order/{id}": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Order"
+        ],
+        "description": "Lista o pedido através do ID",
         "parameters": [
           {
             "name": "id",
@@ -634,8 +649,10 @@
     },
     "/orderByClient/{id}": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Order"
+        ],
+        "description": "Lista o pedido através do ID do cliente",
         "parameters": [
           {
             "name": "id",
@@ -647,6 +664,78 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/orderUpdateStatusPurchase/{id}": {
+      "put": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Atualiza o status do Pedido",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status_purchase": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/orderUpdateDeliveryStatus/{id}": {
+      "put": {
+        "tags": [
+          "Order"
+        ],
+        "description": "Atualiza o status da entrega",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "delivery_status": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
