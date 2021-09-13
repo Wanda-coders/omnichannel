@@ -25,7 +25,6 @@ routes.put('/user', UserController.updateById);
 // auth
 routes.post('/auth', AuthController.store);
 // routes.use(authMiddleware)
-// routes.get('/auth', UserController.index);
 
 // store
 routes.post('/store', StoreController.postStore);
