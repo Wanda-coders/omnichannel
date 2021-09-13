@@ -30,10 +30,7 @@ const doc = {
     }, {
         "name": "Inventory",
         "description": "Rotas referente o estoque"
-    }, {
-        "name": "Product",
-        "description": "Rotas referente os produtos"
-    }
+    },
 ]
 }
 

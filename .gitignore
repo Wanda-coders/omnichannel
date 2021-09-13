@@ -5,3 +5,4 @@ node_modules
 swagger_output.json
 package-lock.json
 .env
+
