@@ -445,8 +445,8 @@
     },
     "/catalog/{id}": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": ["Catalog"],
+        "description": "Lista um produto pelo ID",
         "parameters": [
           {
             "name": "id",
