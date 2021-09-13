@@ -4,3 +4,4 @@ node_modules
 *.png
 swagger_output.json
 package-lock.json
+.env
