@@ -6,23 +6,23 @@ class CatalogController {
 
   async postCatalog(req, res) {
 
-  /*
-    #swagger.tags = ['Catalog']
-    #swagger.description = 'Cria um novo produto no catálogo'
+    /*
+      #swagger.tags = ['Catalog']
+      #swagger.description = 'Cria um novo produto no catálogo'
 
-    #swagger.parameters['catalog'] = {
-        in: 'body',
-        description: 'Dados do catálogo',
-        required: true,
-        type: 'string',
-        schema: {
-          "name": "Funko",
-          "description": "Mulher-Maravilha",
-          "unit_value": "75.00",
-          "category": "Colecionáveis"
+      #swagger.parameters['catalog'] = {
+          in: 'body',
+          description: 'Dados do catálogo',
+          required: true,
+          type: 'string',
+          schema: {
+            "name": "Funko",
+            "description": "Mulher-Maravilha",
+            "unit_value": "75.00",
+            "category": "Colecionáveis"
+        }
       }
-    }
-  */
+    */
 
     const catalogExists = await Catalog.findOne({
       where: {
@@ -60,45 +60,45 @@ class CatalogController {
       #swagger.description = 'Lista um produto pelo ID'
     */
 
-      const { id } = req.params;
+    const { id } = req.params;
 
-      const isCatalogId = await Catalog.findOne({
-        where: {
-          id,
-        },
+    const isCatalogId = await Catalog.findOne({
+      where: {
+        id,
+      },
+    })
+    if (!isCatalogId) {
+      return res.status(404).json({
+        message: "No Product found with this id!"
       })
-      if(!isCatalogId){
-        return res.status(404).json({
-          message: "No Product found with this id!"
-        })
-      }
+    }
 
-      const isPhoto = await Photo.findOne({
-        where: {
-          catalog_id: id,
-        }
-      })
-      if (isPhoto) {
-        var image = isPhoto.url;
+    const isPhoto = await Photo.findOne({
+      where: {
+        catalog_id: id,
       }
+    })
+    if (isPhoto) {
+      var image = isPhoto.url;
+    }
 
-      const returnObject = {
-        ...isCatalogId.dataValues,
-        image: image,
-      }
+    const returnObject = {
+      ...isCatalogId.dataValues,
+      image: image,
+    }
 
-      if (res === undefined) {
-        return returnObject
-      }
-      return res.status(200).json(returnObject);
-    };
+    if (res === undefined) {
+      return returnObject
+    }
+    return res.status(200).json(returnObject);
+  };
 
   async getAllCatalog(req, res) {
 
-  /*
-    #swagger.tags = ['Catalog']
-    #swagger.description = 'Lista os produtos disponíveis'
-  */
+    /*
+      #swagger.tags = ['Catalog']
+      #swagger.description = 'Lista os produtos disponíveis'
+    */
 
     const isCatalog = await Catalog.findAll()
 
@@ -106,11 +106,11 @@ class CatalogController {
     function getEachCatalog(catalogList) {
       const promises = catalogList.map(
         async function (element) {
-          const result2 = await thisClass.getCatalogById({"params": element}).then(function(res) {
+          const result2 = await thisClass.getCatalogById({ "params": element }).then(function (res) {
             return res
           });
           return result2
-      });
+        });
       return Promise.all(promises);
     }
     const catalog_list = await getEachCatalog(isCatalog);

@@ -11,7 +11,7 @@ class App {
   constructor() {
     this.server = express();
     this.cors = cors()
-    this.middleware();   
+    this.middleware();
     this.routes();
   }
 
@@ -23,7 +23,7 @@ class App {
 
   routes() {
     this.server.use(routes);
-    
+
   }
 }
 

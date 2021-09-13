@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      contact: { 
+      contact: {
         type: Sequelize.STRING,
         allowNull: true,
       },

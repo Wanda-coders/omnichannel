@@ -33,22 +33,22 @@ class ProductController {
     const { id, store_id, price, inventory_id } = await Product.create(req.body)
 
     return res.status(201).json({
-        id,
-        catalog_id,
-        store_id,
-        price,
-        inventory_id,
-        catalog_id,
+      id,
+      catalog_id,
+      store_id,
+      price,
+      inventory_id,
+      catalog_id,
 
     });
   };
 
   async getAllProduct(req, res) {
 
-  /*
-    #swagger.tags = ['Product']
-    #swagger.description = 'Lista todos os produtos'
-  */
+    /*
+      #swagger.tags = ['Product']
+      #swagger.description = 'Lista todos os produtos'
+    */
 
     const isProduct = await Product.findAll()
     return res.status(200).json(isProduct);
@@ -56,10 +56,10 @@ class ProductController {
 
   async getProductById(req, res) {
 
-  /*
-    #swagger.tags = ['Product']
-    #swagger.description = 'Lista todos os produtos'
-  */
+    /*
+      #swagger.tags = ['Product']
+      #swagger.description = 'Lista todos os produtos'
+    */
 
     const { id } = req.params;
 

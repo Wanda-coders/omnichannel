@@ -13,21 +13,21 @@ import Order from '../app/model/Order';
 
 const models = [User, Store, Catalog, Inventory, Photo, Product, Order]
 
-class Database{
-    constructor(){
+class Database {
+    constructor() {
         this.init();
         // this.mongo()
     }
-    init(){
+    init() {
         this.connection = new Sequelize(databaseConfig);
         models
-        .map(model => model.init(this.connection))
-        .map(model => model.associate && model.associate(this.connection.models))
+            .map(model => model.init(this.connection))
+            .map(model => model.associate && model.associate(this.connection.models))
 
     }
     // mongo(){
     //    this.mongoConnection = mongoose.connect(
-    //       'mongodb+srv://luizalabs:DvZlesHrbUqE5boD@luizacoders.sm1sy.mongodb.net/Notifications?retryWrites=true&w=majority', 
+    //       'mongodb+srv://luizalabs:DvZlesHrbUqE5boD@luizacoders.sm1sy.mongodb.net/Notifications?retryWrites=true&w=majority',
     //       { useNewUrlParser: true, useUnifiedTopology: true }
     //     )
     //   }

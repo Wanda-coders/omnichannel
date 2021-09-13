@@ -41,7 +41,7 @@ module.exports = {
       },
       state: {
         type: Sequelize.ENUM('AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RR', 'RO', 'RJ', 'RN', 'RS', 'SC', 'SP', 'SE', 'TO'),
-          allowNull: false,
+        allowNull: false,
       },
       city: {
         type: Sequelize.STRING,
@@ -63,7 +63,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      is_admin:{
+      is_admin: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },

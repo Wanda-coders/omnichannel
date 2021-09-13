@@ -5,22 +5,22 @@ class InventoryController {
 
   async postInventory(req, res) {
 
-  /*
-    #swagger.tags = ['Inventory']
-    #swagger.description = 'Adciona um produto no estoque'
+    /*
+      #swagger.tags = ['Inventory']
+      #swagger.description = 'Adciona um produto no estoque'
 
-    #swagger.parameters['inventory'] = {
-        in: 'body',
-        description: 'Dados do inventário/estoque',
-        required: true,
-        type: 'string',
-        schema: {
-          "quantity": 10,
-          "catalog_id": 2,
-          "store_id": 1,
+      #swagger.parameters['inventory'] = {
+          in: 'body',
+          description: 'Dados do inventário/estoque',
+          required: true,
+          type: 'string',
+          schema: {
+            "quantity": 10,
+            "catalog_id": 2,
+            "store_id": 1,
+        }
       }
-    }
-  */
+    */
 
     const { quantity } = req.body
     if (quantity < 0) {
@@ -57,24 +57,24 @@ class InventoryController {
 
   async getInventory(req, res) {
 
-  /*
-    #swagger.tags = ['Inventory']
-    #swagger.description = 'Consulta dados de estoque'
+    /*
+      #swagger.tags = ['Inventory']
+      #swagger.description = 'Consulta dados de estoque'
 
-    #swagger.parameters['catalog_id'] = {
-        in: 'query',
-        description: 'Catalog_id para filtrar dados de estoque',
-        required: false,
-        type: 'integer',
-    }
+      #swagger.parameters['catalog_id'] = {
+          in: 'query',
+          description: 'Catalog_id para filtrar dados de estoque',
+          required: false,
+          type: 'integer',
+      }
 
-    #swagger.parameters['store_id'] = {
-        in: 'query',
-        description: 'Store_id para filtrar dados de estoque',
-        required: false,
-        type: 'integer',
-    }
-  */
+      #swagger.parameters['store_id'] = {
+          in: 'query',
+          description: 'Store_id para filtrar dados de estoque',
+          required: false,
+          type: 'integer',
+      }
+    */
 
     const { catalog_id, store_id } = req.query;
     let inventoryResults;
@@ -114,10 +114,10 @@ class InventoryController {
 
   async getInventoryTotal(req, res) {
 
-  /*
-    #swagger.tags = ['Inventory']
-    #swagger.description = 'Lista o estoque total de um certo produto'
-  */
+    /*
+      #swagger.tags = ['Inventory']
+      #swagger.description = 'Lista o estoque total de um certo produto'
+    */
 
     const { id: catalog_id } = req.params;
     const inventoryResults = await Inventory.findAll({
