@@ -34,7 +34,7 @@ routes.get('/store/:id', StoreController.getStoreById)
 
 // catalogo
 routes.post('/catalog', CatalogController.postCatalog);
-routes.get('/catalog', CatalogController.getAllCatalog);
+routes.get('/catalog', CatalogController.getAllCatalog.bind(CatalogController));
 routes.get('/catalog/:id', CatalogController.getCatalogById);
 
 // estoque

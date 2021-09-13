@@ -1,5 +1,6 @@
 import * as Yup from 'yup'
 import Catalog from "../model/Catalog";
+import Photo from "../model/Photo";
 
 class CatalogController {
 
@@ -60,9 +61,22 @@ class CatalogController {
   */
 
     const isCatalog = await Catalog.findAll()
-    return res.status(200).json(isCatalog);
-  };
 
+    var thisClass = this;
+    function getEachCatalog(catalogList) {
+      const promises = catalogList.map(
+        async function (element) {
+          const result2 = await thisClass.getCatalogById({"params": element}).then(function(res) {
+            return res
+          });
+          return result2
+      });
+      return Promise.all(promises);
+    }
+    const catalog_list = await getEachCatalog(isCatalog);
+    return res.status(200).json(catalog_list);
+
+  };
 
   async getCatalogById(req, res) {
 
@@ -78,15 +92,30 @@ class CatalogController {
         id,
       },
     })
-    if (res === undefined) {
-      return isCatalogId
-    }
     if(!isCatalogId){
       return res.status(404).json({
         message: "No Product found with this id!"
       })
     }
-    return res.status(200).json(isCatalogId);
+
+    const isPhoto = await Photo.findOne({
+      where: {
+        catalog_id: id,
+      }
+    })
+    if (isPhoto) {
+      var image = isPhoto.url;
+    }
+
+    const returnObject = {
+      ...isCatalogId.dataValues,
+      image: image,
+    }
+
+    if (res === undefined) {
+      return returnObject
+    }
+    return res.status(200).json(returnObject);
   };
 
 }
