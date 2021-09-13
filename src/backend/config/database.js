@@ -8,6 +8,5 @@ module.exports = {
         timeStamps: true,
         underscored: true,
         underscoredAll: true,
-
     }
 }

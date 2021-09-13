@@ -25,7 +25,6 @@ routes.put('/user', UserController.updateById);
 // auth
 routes.post('/auth', AuthController.store);
 // routes.use(authMiddleware)
-// routes.get('/auth', UserController.index);
 
 // store
 routes.post('/store', StoreController.postStore);
@@ -34,8 +33,9 @@ routes.get('/store/:id', StoreController.getStoreById)
 
 // catalogo
 routes.post('/catalog', CatalogController.postCatalog);
-routes.get('/catalog', CatalogController.getAllCatalog.bind(CatalogController));
 routes.get('/catalog/:id', CatalogController.getCatalogById);
+routes.get('/catalog', CatalogController.getAllCatalog.bind(CatalogController));
+
 
 // estoque
 routes.post('/inventory', InventoryController.postInventory);
