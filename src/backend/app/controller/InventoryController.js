@@ -111,6 +111,32 @@ class InventoryController {
     }
     return res.status(200).json(inventoryResults);
   };
+
+  async getInventoryTotal(req, res) {
+
+    const { id: catalog_id } = req.params;
+    const inventoryResults = await Inventory.findAll({
+      where: {
+        catalog_id: catalog_id,
+      },
+    })
+    if (!inventoryResults) {
+      return res.status(404).json({
+        message: "Inventory not found!"
+      })
+    }
+    const quantity = inventoryResults.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.quantity,
+      0,
+    );
+    const returnObject = {
+      id: catalog_id,
+      amount: quantity,
+    }
+    return res.status(200).json(returnObject);
+
+  }
+
 }
 
 export default new InventoryController();
