@@ -12,11 +12,11 @@ class Photo extends Model {
         }
       }
     },
-    { sequelize });
+      { sequelize });
     return this;
   }
-  static associate(models){
-    this.belongsTo( models.Catalog, { foreignKey: 'catalog_id', as: 'catalogs'})
+  static associate(models) {
+    this.belongsTo(models.Catalog, { foreignKey: 'catalog_id', as: 'catalogs' })
   }
 }
 

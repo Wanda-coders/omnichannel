@@ -1,4 +1,4 @@
-  
+
 import multer from 'multer';
 import crypto from 'crypto';
 import { extname, resolve } from 'path';
@@ -8,7 +8,7 @@ export default {
     destination: resolve(__dirname, '..', '..', 'tmp', 'uploads'),
     filename: (req, file, cb) => {
       crypto.randomBytes(25, (err, res) => {
-        if(err) return cb(err);
+        if (err) return cb(err);
         return cb(null, res.toString('hex') + extname(file.originalname));
       })
     }

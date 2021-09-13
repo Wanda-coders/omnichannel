@@ -5,20 +5,20 @@ import authConfig from '../../config/auth';
 class AuthController {
 
     async store(req, res) {
-    /*
-        #swagger.tags = ['Authentication']
-        #swagger.description = 'Autentica o usuário'
+        /*
+            #swagger.tags = ['Authentication']
+            #swagger.description = 'Autentica o usuário'
 
-        #swagger.parameters['auth'] = {
-            in: 'body',
-            description: 'Informações de autenticação',
-            required: true,
-            schema: {
-                "email": "nathy.alpino1@gmail.com",
-                "password": "pass"
+            #swagger.parameters['auth'] = {
+                in: 'body',
+                description: 'Informações de autenticação',
+                required: true,
+                schema: {
+                    "email": "nathy.alpino1@gmail.com",
+                    "password": "pass"
+                }
             }
-        }
-    */
+        */
         const { email, password } = req.body;
 
         const user = await User.findOne({

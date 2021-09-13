@@ -128,20 +128,18 @@ class UserController {
             required: true,
             type: 'string',
             schema: {
-                "name": "Natália Alpino",
-                "email": "nathy.alpino1@gmail.com",
-                "oldPassword": "pass",
-                "cpf": "000.000.000-000",
-                "contact": "",
-                "postal_code": "14403-075",
-                "state": "SP",
-                "city": "Franca",
-                "district": "Street",
-                "number_house": 2390,
-                "street": "José Marcelo Leite",
-                "complement": ""
+	"email": "g@gmail.com",
+	"oldPassword": "654321",
+	"password": "654321",
+	"contact": "165545-9687",
+	"district": "Franca",
+	"number_house": "1146",
+	"street": "R. Alvorada",
+	"complement": "esquina",
+	"postal_code": "14465-897"
+}
+
             }
-          }
     */
       const schema = Yup.object().shape({
         name: Yup.string(),

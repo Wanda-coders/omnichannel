@@ -13,13 +13,13 @@ class Store extends Model {
       address: Sequelize.STRING,
       number: Sequelize.STRING,
       complement: Sequelize.STRING,
-    }, 
-    {  
-      sequelize, 
-    });
-    
+    },
+      {
+        sequelize,
+      });
+
     return this;
-}
+  }
 }
 
 export default Store;

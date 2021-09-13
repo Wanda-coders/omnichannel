@@ -20,7 +20,7 @@ module.exports = {
       },
       catalog_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'catalogs', key: 'id'},
+        references: { model: 'catalogs', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: true,

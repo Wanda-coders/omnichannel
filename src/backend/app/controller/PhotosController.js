@@ -29,12 +29,12 @@ class PhotosControllers {
                 id: catalog_id,
             },
         })
-        if(!isCatalogId) {
+        if (!isCatalogId) {
             return res.status(400).json({
                 message: "No Product found with this id!"
             })
         }
-    
+
         const { id, url } = await Photo.create({
             image_name,
             path,

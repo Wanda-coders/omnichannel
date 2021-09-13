@@ -14,6 +14,20 @@ class OrderController {
   /*
     #swagger.tags = ['Order']
     #swagger.description = 'Inicia um novo pedido'
+
+  #swagger.parameters['order'] = {
+        in: 'body',
+        description: 'Iniciar um novo pedido',
+        required: true,
+        type: 'string',
+        schema: {"store_id": 1,
+	"user_id": 1,
+	"date_purchase": "1997-12-03T00:00:00.000Z",
+	"product_list": [
+		{"id": 1, "quantity": 1, "price": 199.00}
+	]
+      }
+    }
   */
 
     const date = new Date()
