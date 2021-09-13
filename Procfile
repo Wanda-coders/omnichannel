@@ -1,1 +1,1 @@
-web: node src/backend/server.js
+web: node --experimental-specifier-resolution=node src/backend/server.js
