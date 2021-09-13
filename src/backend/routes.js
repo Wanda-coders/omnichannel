@@ -49,5 +49,7 @@ routes.post('/photos', upload.single('photo'), PhotosController.store);
 routes.post('/order', OrderController.postOrder);
 routes.get('/order/:id', OrderController.getOrderById);
 routes.get('/orderByClient/:id', OrderController.getAllByIdCliente.bind(OrderController));
+routes.put('/orderUpdateStatusPurchase/:id', OrderController.updateStatusPurchase);
+routes.put('/orderUpdateDeliveryStatus/:id', OrderController.updateDeliveryStatus);
 
 export default routes;
