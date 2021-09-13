@@ -53,6 +53,46 @@ class CatalogController {
 
   };
 
+  async getCatalogById(req, res) {
+
+    /*
+      #swagger.tags = ['Catalog']
+      #swagger.description = 'Lista um produto pelo ID'
+    */
+
+      const { id } = req.params;
+
+      const isCatalogId = await Catalog.findOne({
+        where: {
+          id,
+        },
+      })
+      if(!isCatalogId){
+        return res.status(404).json({
+          message: "No Product found with this id!"
+        })
+      }
+
+      const isPhoto = await Photo.findOne({
+        where: {
+          catalog_id: id,
+        }
+      })
+      if (isPhoto) {
+        var image = isPhoto.url;
+      }
+
+      const returnObject = {
+        ...isCatalogId.dataValues,
+        image: image,
+      }
+
+      if (res === undefined) {
+        return returnObject
+      }
+      return res.status(200).json(returnObject);
+    };
+
   async getAllCatalog(req, res) {
 
   /*
@@ -78,45 +118,7 @@ class CatalogController {
 
   };
 
-  async getCatalogById(req, res) {
 
-  /*
-    #swagger.tags = ['Catalog']
-    #swagger.description = 'Lista um produto pelo ID'
-  */
-
-    const { id } = req.params;
-
-    const isCatalogId = await Catalog.findOne({
-      where: {
-        id,
-      },
-    })
-    if(!isCatalogId){
-      return res.status(404).json({
-        message: "No Product found with this id!"
-      })
-    }
-
-    const isPhoto = await Photo.findOne({
-      where: {
-        catalog_id: id,
-      }
-    })
-    if (isPhoto) {
-      var image = isPhoto.url;
-    }
-
-    const returnObject = {
-      ...isCatalogId.dataValues,
-      image: image,
-    }
-
-    if (res === undefined) {
-      return returnObject
-    }
-    return res.status(200).json(returnObject);
-  };
 
 }
 
